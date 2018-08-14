@@ -1,0 +1,26 @@
+{
+  "name": "revalid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ps-aux/revalid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ps-aux/revalid/issues"
+  },
+  "homepage": "https://github.com/ps-aux/revalid#readme",
+  "devDependencies": {
+    "jest": "^23.5.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0"
+  }
+}
