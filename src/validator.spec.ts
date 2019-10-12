@@ -1,6 +1,6 @@
-import { validator } from './validator'
+import { validator } from 'src/validator'
 import { email, minLen, notEmpty } from './rules'
-import codes from './codes'
+import codes from 'src/common-rules/codes'
 
 describe('validator', () => {
     it('applies rules', () => {
@@ -10,8 +10,8 @@ describe('validator', () => {
         })
 
         expect(validate({})).toMatchObject({
-            a: {code: 'bad a'},
-            b: {code: 'bad b'}
+            a: { code: 'bad a' },
+            b: { code: 'bad b' }
         })
     })
 
@@ -29,9 +29,9 @@ describe('validator', () => {
                 c: ''
             })
         ).toMatchObject({
-            a: {code: codes.EMPTY},
-            b: {code: codes.EMAIL},
-            c: {code: codes.EMPTY}
+            a: { code: codes.EMPTY },
+            b: { code: codes.EMAIL },
+            c: { code: codes.EMPTY }
         })
 
         expect(
@@ -41,20 +41,24 @@ describe('validator', () => {
                 c: '12'
             })
         ).toMatchObject({
-            c: {code: codes.MIN_LEN}
+            c: { code: codes.MIN_LEN }
         })
     })
 
     it('with error wrapping', () => {
-        const validate = validator({
-            a: [notEmpty()]
-        }, {codesOnly: false})
+        const validate = validator(
+            {
+                a: [notEmpty()]
+            },
+            { codesOnly: false }
+        )
 
-        expect(validate({
-            a: ''
-        })).toMatchObject({
-            a: {code: codes.EMPTY}
+        expect(
+            validate({
+                a: ''
+            })
+        ).toMatchObject({
+            a: { code: codes.EMPTY }
         })
-
     })
 })
