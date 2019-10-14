@@ -1,4 +1,4 @@
-import { regexRule, rule } from './ruleBuilder'
+import { regexRule, rule } from 'src/rule-builder/ruleBuilder'
 
 describe('ruleBuilder', () => {
     describe('rule', () => {

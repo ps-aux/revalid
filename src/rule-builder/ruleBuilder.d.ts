@@ -1,4 +1,4 @@
-import { RuleDef } from 'src/rules'
+import { RuleDef } from 'src/common-rules/rules'
 
 declare type ValueTest = (val: any, opts?: any) => Boolean
 

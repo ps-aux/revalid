@@ -32,8 +32,7 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['*.test.js', '*.spec.js'],
-
+            files: ['*.test.js', '*.spec.js', '*.test.ts', '*.spec.ts'],
             globals: {
                 it: true,
                 expect: true,

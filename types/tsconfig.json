@@ -5,7 +5,7 @@
     // Search under node_modules for non-relative imports.
     "moduleResolution": "node",
     "paths": {
-      "src": ["."]
+      "src": [".."]
     },
     "resolveJsonModule": true,
     // Process & infer types from .js files.

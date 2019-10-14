@@ -1,5 +1,8 @@
-import { validator as _validator } from 'src/validator'
-import * as _rules from './rules'
+import { createValidator } from 'src/validator/Validator'
+import * as _rules from 'src/common-rules/rules'
 
-export const validator = _validator
-export const rules = _rules
+export const Validator = createValidator
+// export const rules = _rules
+
+
+

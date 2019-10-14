@@ -7,7 +7,7 @@ import {
     notNull,
     onlyLetters,
     phoneNumber
-} from './rules'
+} from 'src/common-rules/rules'
 
 const testRule = (name, rule, { error, valid = [], invalid = [] }) =>
     describe(name, () => {
