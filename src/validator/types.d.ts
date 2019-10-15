@@ -1,10 +1,12 @@
 export type ValidationTestResult = {
     passed: boolean,
-    detail: any
+    error?:{
+        code: string,
+        detail?: any
+    }
 }
 
 export type ValidationRule = {
-    name: string,
     test: (val: any) => ValidationTestResult
 }
 

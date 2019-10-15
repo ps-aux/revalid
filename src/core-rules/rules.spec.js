@@ -1,4 +1,4 @@
-import codes from 'src/common-rules/codes'
+import codes from 'src/core-rules/codes'
 import {
     email,
     maxLen,
@@ -7,7 +7,7 @@ import {
     notNull,
     onlyLetters,
     phoneNumber
-} from 'src/common-rules/rules'
+} from 'src/core-rules/rules'
 
 const testRule = (name, rule, { error, valid = [], invalid = [] }) =>
     describe(name, () => {

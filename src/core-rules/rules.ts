@@ -1,5 +1,5 @@
-import codes from 'src/common-rules/codes'
-import { regexRule, rule } from 'src/rule-builder/ruleBuilder'
+import codes from 'src/core-rules/codes'
+import { regexRule, rule } from 'src/rule-builder/SimpleRule'
 
 export const notEmpty = () => v =>
     v && v.trim().length > 0 ? undefined : codes.EMPTY

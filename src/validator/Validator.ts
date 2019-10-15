@@ -12,10 +12,11 @@ const validate = (schema: ValidationSchema, data: Data): [string, ValidationErro
             if (res.passed)
                 return
 
+            const err = res.error!
             errors.push([key, {
-                code: rule.name,
+                code: err.code,
                 value,
-                detail: res.detail
+                detail: err.detail
             }])
         })
 
