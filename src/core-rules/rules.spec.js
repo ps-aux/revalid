@@ -1,14 +1,15 @@
-import codes from './codes'
-import { minLen, notEmpty } from './rules'
+import codes from 'src/core-rules/codes'
 import {
     email,
     maxLen,
+    minLen,
+    notEmpty,
     notNull,
-    phoneNumber,
-    onlyLetters
-} from './rules'
+    onlyLetters,
+    phoneNumber
+} from 'src/core-rules/rules'
 
-const testRule = (name, rule, {error, valid = [], invalid = []}) =>
+const testRule = (name, rule, { error, valid = [], invalid = [] }) =>
     describe(name, () => {
         valid.forEach(v =>
             it(`${v} is valid`, () => {
@@ -23,7 +24,7 @@ const testRule = (name, rule, {error, valid = [], invalid = []}) =>
         )
     })
 
-describe('rules', () => {
+describe('rules.ts.jts', () => {
     testRule('notEmpty', notEmpty(), {
         error: codes.EMPTY,
         valid: ['yes'],
@@ -62,7 +63,10 @@ describe('rules', () => {
 
     testRule('only letters', onlyLetters(), {
         error: codes.ONLY_LETTERS,
-        valid: ['abcdefghijklmnopqrstuvxyz', 'ÁáÄäČčĎďÉéÍíĹĺĽľŇňÓóÔôŔŕŠšŤťÚúÝýŽžÁáČčĎďÉéĚěÍíŇňÓóŘřŠšŤťÚúŮůÝýŽž'],
+        valid: [
+            'abcdefghijklmnopqrstuvxyz',
+            'ÁáÄäČčĎďÉéÍíĹĺĽľŇňÓóÔôŔŕŠšŤťÚúÝýŽžÁáČčĎďÉéĚěÍíŇňÓóŘřŠšŤťÚúŮůÝýŽž'
+        ],
         invalid: ['Doe_', 'In va#lid', 'NoWay123']
     })
 })
