@@ -1,3 +1,3 @@
-# Wow, so much WIP
+# Revalid
 
-No lib, no build no CI...
+Just another validator
