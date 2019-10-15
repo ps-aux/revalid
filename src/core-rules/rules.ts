@@ -110,6 +110,7 @@ const cz = [
 /**
  * Remove duplicates
  */
+// @ts-ignore
 const all = [...sk, ...cz].reduce((acc, curr) => {
     if (!acc.find(i => i === curr)) return [...acc, curr]
     return acc

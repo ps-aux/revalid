@@ -1,0 +1,47 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:11.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Prepare
+          command: npm install --no-save
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Test
+          command: |
+            npm test
+      - run:
+          name: Typecheck
+          command: |
+            npm run typecheck
+      - run:
+          name: Build
+          command: |
+            npm run build
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+      - run:
+          name: Publish
+          command: |
+            git config user.email "ps-aux@ci.com"
+            git config user.name "ps-aux-ci"
+            export BUILD_NO=${CIRCLE_BUILD_NUM}
+            version=$(npm run -s get-version)
+            npm version ${version} --allow-same-version
+            npm run pub
+workflows:
+  version: 2
+  all:
+    jobs:
+      - build:
+          context: NPM
