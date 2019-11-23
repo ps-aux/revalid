@@ -1,4 +1,4 @@
-import { SimpleRuleBuilder } from 'src/rule-builder/types'
+import { SimpleRuleBuilder } from 'src/rule/types'
 
 export const rule = ({ test, code }) => (ops?: any) => val => {
     if (val == null) return false

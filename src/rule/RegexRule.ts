@@ -1,4 +1,4 @@
-import { RegexRuleBuilder } from 'src/rule-builder/types'
+import { RegexRuleBuilder } from 'src/rule/types'
 
 export const RegexRule: RegexRuleBuilder = ({ name, regex }) => ({
     test: val => {

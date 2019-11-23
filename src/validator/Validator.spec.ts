@@ -1,4 +1,4 @@
-import { createValidator } from 'src/validator/Validator'
+import { createValidator } from 'src/object/Validator'
 import { ValidationRule } from 'src/validator/types'
 
 const mustBe = (val: any): ValidationRule => ({

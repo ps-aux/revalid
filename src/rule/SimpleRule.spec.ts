@@ -1,28 +1,27 @@
-import { SimpleRule } from 'src/rule-builder/SimpleRule'
-import { RegexRule } from 'src/rule-builder/RegexRule'
+import { SimpleRule } from 'src/rule/SimpleRule'
 
 describe('SimpleRule', () => {
     it('basic case', () => {
-        const rule = RegexRule({ name: 'is-a', regex: /a/ })
+        const rule = SimpleRule({ name: 'is-4', holds: v => v === 4 })
 
-        const okRes = rule.test('a')
+        const okRes = rule.test(4)
 
         expect(okRes).toMatchObject({
             passed: true
         })
 
-        const failRes = rule.test('b')
+        const failRes = rule.test(6)
 
         expect(failRes).toMatchObject({
             passed: false,
             error: {
-                code: 'is-a'
+                code: 'is-4'
             }
         })
     })
 
     it('null or undefined is valid', () => {
-        const rule = RegexRule({ name: 'any', regex: /any/ })
+        const rule = SimpleRule({ name: 'any', holds: () => false })
 
         expect(rule.test(null)).toMatchObject({
             passed: true

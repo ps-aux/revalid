@@ -1,8 +1,6 @@
-import { createValidator } from 'src/validator/Validator'
-import * as _rules from 'src/core-rules/rules'
+import { createValidator } from 'src/object/Validator'
 
 export const Validator = createValidator
-// export const rules = _rules
 
 
 
