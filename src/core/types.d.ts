@@ -1,22 +1,22 @@
-export type ValidationTestResult = {
+export type ValidationTestResult<ErrDetail> = {
     passed: boolean
     error?: {
         message: string
-        detail?: any
+        detail: ErrDetail
     }
 }
 
-export type ValidationRule<A> = {
+export type ValidationRule<A, ErrDetail> = {
     name: string
-    test: (val?: A) => ValidationTestResult
+    test: (val?: A) => ValidationTestResult<ErrDetail>
 }
 
-export type ValidationError = {
+export type ValidationError<ErrDetail> = {
     code: string
     message: string
-    detail?: any
+    detail: ErrDetail
 }
 
 export type RuleEvaluator = {
-    <A>(rule: ValidationRule<A>, data: A): ValidationError | null
+    <A, ErrDetail>(rule: ValidationRule<A, ErrDetail>, data: A): ValidationError<ErrDetail> | null
 }

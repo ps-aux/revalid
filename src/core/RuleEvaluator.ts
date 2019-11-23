@@ -1,6 +1,6 @@
 import { RuleEvaluator, ValidationRule } from 'src/core/types'
 
-export const evalRule: RuleEvaluator = <A>(rule: ValidationRule<A>, data: A) => {
+export const evalRule: RuleEvaluator = <A, ErrDetail>(rule: ValidationRule<A, ErrDetail>, data: A) => {
     const res = rule.test(data)
 
     if (res.passed) return null
@@ -9,6 +9,7 @@ export const evalRule: RuleEvaluator = <A>(rule: ValidationRule<A>, data: A) => 
     return {
         code: rule.name,
         message: err ? err!.message : `Does not passes rule ${rule.name}`,
-        detail: err && err!.detail
+        // TODO
+        detail: (err && err!.detail) as ErrDetail
     }
 }

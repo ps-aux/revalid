@@ -1,7 +1,8 @@
-import { createValidator } from 'src/object/Validator'
-import { ValidationRule } from 'src/validator/types'
+import { createObjectValidator } from 'src/validator/ObjectValidator'
+import { ValidationRule } from 'src/core/types'
 
-const mustBe = (val: any): ValidationRule => ({
+const mustBe = (val: any): ValidationRule<any, any> => ({
+    name: `must-be-${val}`,
     test: x => {
         const passed = x === val
 
@@ -10,24 +11,25 @@ const mustBe = (val: any): ValidationRule => ({
             error: passed
                 ? undefined
                 : {
-                      code: 'is-not',
-                      detail: 'detail'
-                  }
+                    message: x + 'is-not' + val,
+                    detail: 'detail'
+                }
         }
     }
 })
 
 describe('Validator', () => {
     it('basic test case', () => {
-        const sut = createValidator({
+        const sut = createObjectValidator({
             a: mustBe(3),
-            b: mustBe('abc')
+            b: [mustBe('abc')]
         })
 
         const res = sut({
             b: 456
-        })
+        })!
 
+        console.log('res', res)
         expect(res).toMatchObject({
             a: { code: 'is-not', value: undefined, detail: 'detail' },
             b: { code: 'is-not', value: 456, detail: 'detail' }

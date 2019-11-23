@@ -1,4 +1,4 @@
-import { matchesSchema } from 'src/object/matchesSchema'
+import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
 import { number, string } from 'src/rule-impl/type-rules/typeRule'
 import { notNull } from 'src/rule-impl/basic-rules/notNull'
 import { notEmpty } from 'src/rule-impl/basic-rules/notEmpty'

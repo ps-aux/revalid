@@ -1,14 +1,14 @@
 import { RuleEvaluator, ValidationError, ValidationRule } from 'src/core/types'
-import { Data, Schema } from 'src/object/typed'
+import { Data, Schema, SchemaErrorDetail } from 'src/rule-impl/object/typed'
 import { evalRule } from 'src/core/RuleEvaluator'
 
 const testEntry = (
     ruleEval: RuleEvaluator,
-    rules: ValidationRule<any>[],
+    rules: ValidationRule<any, any>[],
     val: any
-): ValidationError[] => {
+): ValidationError<any>[] => {
     // TODO support for early exit
-    const errors: ValidationError[] = []
+    const errors: ValidationError<any>[] = []
 
     rules.forEach(r => {
         const err = ruleEval(r, val)
@@ -25,7 +25,7 @@ const schemaToString = (s: Schema): string => {
     return `Object with keys: ${Object.keys(s).toString()}`
 }
 
-export const matchesSchema = (schema: Schema): ValidationRule<Data> => {
+export const matchesSchema = (schema: Schema): ValidationRule<Data, SchemaErrorDetail> => {
     const ruleEval = evalRule
 
     return {
@@ -36,7 +36,7 @@ export const matchesSchema = (schema: Schema): ValidationRule<Data> => {
                     passed: true
                 }
 
-            const errors: { attr: string, errors: ValidationError[] }[] = []
+            const errors: SchemaErrorDetail = []
 
             Object.entries(schema).forEach(([key, rules]) => {
                 const value = data[key]

@@ -1,6 +1,6 @@
-import { ConfRuleConstructor } from 'src/rule/types'
+import { ConfRuleConstructor } from 'src/rule-constructor/types'
 
-export const regex: ConfRuleConstructor<string, RegExp> = regex => ({
+export const regex: ConfRuleConstructor<string, void, RegExp> = regex => ({
     name: 'matches-regex',
     test: (val?: string) => {
         if (val == null)
