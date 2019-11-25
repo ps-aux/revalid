@@ -1,6 +1,6 @@
-import { createValidator } from 'src/rule-impl/object/Validator'
-
-export const Validator = createValidator
+export { createObjectValidator } from 'src/validator/ObjectValidator'
+export { notEmpty } from 'src/rule-impl/basic-rules/notEmpty'
+export { notNull } from 'src/rule-impl/basic-rules/notNull'
 
 
 

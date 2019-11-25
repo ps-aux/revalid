@@ -11,7 +11,7 @@ const mustBe = (val: any): ValidationRule<any, any> => ({
             error: passed
                 ? undefined
                 : {
-                    message: x + 'is-not' + val,
+                    message: 'is not',
                     detail: 'detail'
                 }
         }
@@ -29,10 +29,27 @@ describe('Validator', () => {
             b: 456
         })!
 
-        console.log('res', res)
         expect(res).toMatchObject({
-            a: { code: 'is-not', value: undefined, detail: 'detail' },
-            b: { code: 'is-not', value: 456, detail: 'detail' }
+            a: {
+                value: undefined,
+                errors: [
+                    {
+                        code: 'must-be-3',
+                        message: 'is not',
+                        detail: 'detail'
+                    }
+                ]
+            },
+            b: {
+                value: 456,
+                errors: [
+                    {
+                        code: 'must-be-abc',
+                        message: 'is not',
+                        detail: 'detail'
+                    }
+                ]
+            }
         })
     })
 })

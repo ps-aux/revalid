@@ -18,14 +18,14 @@ const testEntry = (
     return errors
 }
 
-
 const schemaToString = (s: Schema): string => {
-
     // TODO implement
     return `Object with keys: ${Object.keys(s).toString()}`
 }
 
-export const matchesSchema = (schema: Schema): ValidationRule<Data, SchemaErrorDetail> => {
+export const matchesSchema = (
+    schema: Schema
+): ValidationRule<Data, SchemaErrorDetail> => {
     const ruleEval = evalRule
 
     return {
@@ -43,7 +43,11 @@ export const matchesSchema = (schema: Schema): ValidationRule<Data, SchemaErrorD
                 const propErrors = testEntry(ruleEval, rules, value)
 
                 if (propErrors.length > 0) {
-                    errors.push({ attr: key, errors: propErrors })
+                    errors.push({
+                        attr: key,
+                        value: value,
+                        errors: propErrors
+                    })
                 }
             })
 

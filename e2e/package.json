@@ -1,0 +1,17 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "psaux",
+  "license": "ISC",
+  "dependencies": {
+    "@ps-aux/revalid": "file:ps-aux-revalid-0.2.0-rc.tgz"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}

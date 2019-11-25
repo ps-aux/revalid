@@ -15,7 +15,10 @@ export type ValidationError = {
 }
 
 export type ValidationErrors = {
-    [key: string]: ValidationError[]
+    [key: string]: {
+        value: any
+        errors: ValidationError[]
+    }
 }
 
 export type ObjectValidator = (data: ObjectData) => ValidationErrors | null
@@ -46,7 +49,10 @@ export const createObjectValidator = (
         const errRes: ValidationErrors = {}
 
         errors.forEach(err => {
-            errRes[err.attr] = err.errors
+            errRes[err.attr] = {
+                value: err.value,
+                errors: err.errors
+            }
         })
 
         return errRes
