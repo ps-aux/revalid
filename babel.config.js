@@ -1,5 +1,16 @@
 module.exports = {
-    presets: ['@babel/preset-env', '@babel/typescript'],
+    presets: [
+        [
+            '@babel/preset-env',
+            {
+                targets: {
+                    node: true
+                }
+                // modules: false, // ES6 modules only
+            }
+        ],
+        '@babel/typescript'
+    ],
     plugins: [
         '@babel/plugin-proposal-class-properties',
         [

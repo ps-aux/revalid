@@ -7,7 +7,11 @@ npm run build
 npm pack
 
 mv ps-aux-* e2e/
+
+
+
 cd e2e
+# rm -rf node_modules
 npm i ps-aux-*
 rm ps-aux-*
 npm test

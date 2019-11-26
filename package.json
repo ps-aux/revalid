@@ -2,9 +2,10 @@
   "name": "@ps-aux/revalid",
   "version": "0.2.0-rc",
   "description": "",
-  "main": "build/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "scripts": {
-    "build": "rm -rf build && babel --extensions '.ts,.js' src -d build src",
+    "build": "rm -rf build && babel --extensions '.ts,.js' src -d lib src",
     "pub": "npm publish --access public",
     "test": "jest src",
     "get-version": "scripts/get-version.js",
@@ -21,10 +22,10 @@
     "url": "https://github.com/ps-aux/revalid/issues"
   },
   "files": [
-    "build",
-    "types",
-    "src"
+    "lib",
+    "types"
   ],
+  "type": "module",
   "typings": "types/index.d.ts",
   "homepage": "https://github.com/ps-aux/revalid#readme",
   "devDependencies": {
