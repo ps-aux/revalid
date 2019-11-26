@@ -21,5 +21,9 @@
     "esModuleInterop": true,
     "baseUrl": "./"
   },
-  "include": ["."]
+  "include": ["."],
+  "exclude": [
+    "node_modules",
+    "e2e/**/*"
+  ]
 }

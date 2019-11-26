@@ -1,7 +1,7 @@
 import { ValidationRule } from 'src/core/types'
 
 export type Spec<A> = {
-    rule: ValidationRule<A>
+    rule: ValidationRule<A, any>
     input: A,
     passes: boolean
 }

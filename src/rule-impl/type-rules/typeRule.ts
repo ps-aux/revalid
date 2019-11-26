@@ -3,7 +3,7 @@ import { RuleConstructor } from 'src/rule-constructor/types'
 const isTypeRule = (
     typeName: string,
     isType: (a: any) => boolean
-): RuleConstructor<any> => () => ({
+): RuleConstructor<any, any> => () => ({
     name: `is-${typeName}`,
     test: (a?: any) => {
         if (a == null)

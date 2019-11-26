@@ -1,7 +1,7 @@
 import { ValidationRule } from 'src/core/types'
 import { evalRule } from 'src/core/RuleEvaluator'
 
-const mustBeFoo: ValidationRule<string> = {
+const mustBeFoo: ValidationRule<string, any> = {
     name: 'must-be-foo',
     test: x => {
         const passed = x === 'foo'
