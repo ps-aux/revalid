@@ -1,27 +1,6 @@
-import { Schema } from 'src/rule-impl/object/typed'
 import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
-import { ValidationRule } from 'src/core/types'
+import { ObjectSchema, ObjectValidator, Schema, ValidationErrors } from 'types'
 
-export type ObjectData = { [key: string]: any }
-
-export type ObjectSchema = {
-    [key: string]: ValidationRule<any, any> | ValidationRule<any, any>[]
-}
-
-export type ValidationError = {
-    code: string
-    message: string
-    detail: any
-}
-
-export type ValidationErrors = {
-    [key: string]: {
-        value: any
-        errors: ValidationError[]
-    }
-}
-
-export type ObjectValidator = (data: ObjectData) => ValidationErrors | null
 
 const ensureArray = <A>(a: A | A[]): A[] => {
     if (Array.isArray(a)) return a

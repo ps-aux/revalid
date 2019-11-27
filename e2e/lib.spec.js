@@ -1,10 +1,10 @@
-const { createObjectValidator } = require('@ps-aux/revalid')
-const { notNull } = require('@ps-aux/revalid/lib/rules')
+const { Validator } = require('@ps-aux/revalid')
+const { notNull } = require('@ps-aux/revalid')
 
 // const { notNull } = require('@ps-aux/revalid/lib/rules')
 
 it('import works', () => {
-  const validate = createObjectValidator({
+  const validate = Validator({
     a: [notNull()]
   })
 

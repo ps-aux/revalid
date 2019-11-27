@@ -1,4 +1,4 @@
-import { RuleEvaluator, ValidationRule } from 'src/core/types'
+import { RuleEvaluator, ValidationRule } from 'types'
 
 export const evalRule: RuleEvaluator = <A, ErrDetail>(rule: ValidationRule<A, ErrDetail>, data: A) => {
     const res = rule.test(data)

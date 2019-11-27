@@ -1,6 +1,6 @@
-import { RuleConstructor } from 'src/rule-constructor/types'
+import { notNullRuleConst } from 'types'
 
-export const notNull: RuleConstructor<string, void> = () => ({
+export const notNull: notNullRuleConst = () => ({
     name: 'not-null',
     test: (v?: any) => {
         if (v === null || v === undefined)

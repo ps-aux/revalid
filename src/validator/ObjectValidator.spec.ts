@@ -1,5 +1,5 @@
 import { createObjectValidator } from 'src/validator/ObjectValidator'
-import { ValidationRule } from 'src/core/types'
+import { ValidationRule } from 'types'
 
 const mustBe = (val: any): ValidationRule<any, any> => ({
     name: `must-be-${val}`,

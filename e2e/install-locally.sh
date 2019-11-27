@@ -14,4 +14,3 @@ cd e2e
 # rm -rf node_modules
 npm i ps-aux-*
 rm ps-aux-*
-npm test

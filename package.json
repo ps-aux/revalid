@@ -1,9 +1,9 @@
 {
   "name": "@ps-aux/revalid",
-  "version": "0.2.0-rc",
+  "version": "0.2.0-dev-5",
   "description": "",
-  "main": "lib/index.js",
   "module": "lib/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "rm -rf build && babel --extensions '.ts,.js' src -d lib src",
     "pub": "npm publish --access public",
@@ -23,10 +23,10 @@
   },
   "files": [
     "lib",
-    "types"
+    "src",
+    "types.d.ts"
   ],
-  "type": "module",
-  "typings": "types/index.d.ts",
+  "typings": "types.d.ts",
   "homepage": "https://github.com/ps-aux/revalid#readme",
   "devDependencies": {
     "@babel/cli": "^7.6.4",

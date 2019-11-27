@@ -1,4 +1,4 @@
-import { ValidationRule } from 'src/core/types'
+import { ValidationRule } from 'types'
 
 export type Spec<A> = {
     rule: ValidationRule<A, any>

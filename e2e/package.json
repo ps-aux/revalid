@@ -10,7 +10,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@ps-aux/revalid": "file:ps-aux-revalid-0.2.0-rc.tgz"
+    "@ps-aux/revalid": "file:ps-aux-revalid-0.2.0-dev-5.tgz"
   },
   "devDependencies": {
     "jest": "^24.9.0"

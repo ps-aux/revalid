@@ -1,6 +1,5 @@
-import { RuleEvaluator, ValidationError, ValidationRule } from 'src/core/types'
-import { Data, Schema, SchemaErrorDetail } from 'src/rule-impl/object/typed'
 import { evalRule } from 'src/core/RuleEvaluator'
+import { Data, RuleEvaluator, Schema, SchemaErrorDetail, ValidationError, ValidationRule } from 'types'
 
 const testEntry = (
     ruleEval: RuleEvaluator,

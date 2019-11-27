@@ -28,6 +28,12 @@ jobs:
           command: |
             npm run build
       - run:
+          name: E2e lib test
+          working_directory: e2e
+          command: |
+            ./install-locally.sh
+            npm test
+      - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
       - run:
