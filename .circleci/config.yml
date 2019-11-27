@@ -27,12 +27,19 @@ jobs:
           name: Build
           command: |
             npm run build
+      - restore_cache:
+          key: dependency-cache-e2e-{{ checksum "package.json" }}
       - run:
           name: E2e lib test
           working_directory: e2e
           command: |
             ./install-locally.sh
+            npm i
             npm test
+      - save_cache:
+          key: dependency-cache-e2e-{{ checksum "package.json" }}
+          paths:
+            - ./e2e/node_modules
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
