@@ -36,6 +36,7 @@ jobs:
             ./install-locally.sh
             npm i
             npm test
+            git reset --hard
       - save_cache:
           key: dependency-cache-e2e-{{ checksum "package.json" }}
           paths:
