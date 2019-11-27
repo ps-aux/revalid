@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const packageVersion = process.env.npm_package_version
+const packageVersion = require('../package.json').version
 
 const isRc = packageVersion.endsWith('-rc')
 
