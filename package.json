@@ -1,6 +1,6 @@
 {
   "name": "@ps-aux/revalid",
-  "version": "0.2.0-dev-5",
+  "version": "0.3.0-rc",
   "description": "",
   "module": "lib/index.js",
   "main": "lib/index.js",
@@ -8,7 +8,6 @@
     "build": "rm -rf build && babel --extensions '.ts,.js' src -d lib src",
     "pub": "npm publish --access public",
     "test": "jest src",
-    "get-version": "scripts/get-version.js",
     "typecheck": "tsc --noEmit"
   },
   "repository": {
