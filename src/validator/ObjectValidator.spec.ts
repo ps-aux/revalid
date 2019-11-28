@@ -1,5 +1,6 @@
-import { createObjectValidator } from 'src/validator/ObjectValidator'
+import { createObjectValidator, obj } from 'src/validator/ObjectValidator'
 import { ValidationRule } from 'types'
+import { notNull } from 'src/rule-impl/basic-rules/notNull'
 
 const mustBe = (val: any): ValidationRule<any, any> => ({
     name: `must-be-${val}`,
@@ -22,12 +23,20 @@ describe('Validator', () => {
     it('basic test case', () => {
         const sut = createObjectValidator({
             a: mustBe(3),
-            b: [mustBe('abc')]
+            b: [mustBe('abc')],
+            c: [
+                obj({
+                    a: [notNull()]
+                }),
+                notNull()
+            ]
         })
 
         const res = sut({
             b: 456
-        })!
+        })
+
+        console.log('errors', res)
 
         expect(res).toMatchObject({
             a: {

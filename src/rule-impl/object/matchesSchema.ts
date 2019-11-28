@@ -2,7 +2,7 @@ import { evalRule } from 'src/core/RuleEvaluator'
 import {
     Data,
     RuleEvaluator,
-    Schema,
+    RuleMap,
     SchemaErrorDetail,
     ValidationError,
     ValidationRule
@@ -16,21 +16,23 @@ const testEntry = (
     // TODO support for early exit
     const errors: ValidationError<any>[] = []
 
+    console.log('testing', val, rules)
     rules.forEach(r => {
         const err = ruleEval(r, val)
+        console.log('   rule', r, err)
         if (err) errors.push(err)
     })
 
     return errors
 }
 
-const schemaToString = (s: Schema): string => {
+const schemaToString = (s: RuleMap): string => {
     // TODO implement
     return `Object with keys: ${Object.keys(s).toString()}`
 }
 
 export const matchesSchema = (
-    schema: Schema
+    schema: RuleMap
 ): ValidationRule<Data, SchemaErrorDetail> => {
     const ruleEval = evalRule
 

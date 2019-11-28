@@ -20,6 +20,10 @@ jobs:
           command: |
             npm test
       - run:
+          name: Lint
+          command: |
+            npm run lint
+      - run:
           name: Typecheck
           command: |
             npm run typecheck

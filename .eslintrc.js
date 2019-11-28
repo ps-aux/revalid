@@ -1,11 +1,10 @@
 module.exports = {
     extends: [
         'plugin:@typescript-eslint/recommended',
-        'eslint-config-standard',
+        'eslint-config-standard'
         // 'prettier/@typescript-eslint',
-        'plugin:react/recommended'
     ],
-    plugins: ['prettier', 'react'],
+    plugins: ['prettier'],
     parser: 'babel-eslint',
     rules: {
         curly: 'off',
@@ -17,13 +16,12 @@ module.exports = {
         indent: 'off',
         // So we can use comma operator
         'no-sequences': 'off',
-        'react/prop-types': 'off',
-        'react/display-name': 'off',
         '@typescript-eslint/member-delimiter-style': 'off',
         '@typescript-eslint/prefer-interface': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off',
         // https://github.com/typescript-eslint/typescript-eslint/issues/46#issuecomment-470486034
         '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
         '@typescript-eslint/indent': 'off',
@@ -32,10 +30,19 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['*.test.js', '*.spec.js', '*.test.ts', '*.spec.ts'],
+            files: [
+                '*.test.js',
+                '*.spec.js',
+                '*.test.ts',
+                '*.spec.ts',
+                'src/test/**'
+            ],
             globals: {
+                jest: true,
                 it: true,
                 expect: true,
+                afterAll: true,
+                beforeAll: true,
                 beforeEach: true,
                 describe: true
             }
@@ -44,17 +51,10 @@ module.exports = {
             files: ['*.ts', '*.tsx'],
             parser: '@typescript-eslint/parser',
             parserOptions: {
-                ecmaFeatures: {
-                    jsx: true
-                },
                 sourceType: 'module'
             }
         }
     ],
 
-    settings: {
-        react: {
-            version: 'detect' // React version. "detect" automatically picks the version you have installed.
-        }
-    }
+    settings: {}
 }

@@ -44,12 +44,15 @@ export type SchemaErrorDetail = {
 
 export type Data = { [key: string]: any }
 
-export type Schema = { [key: string]: ValidationRule<any, any>[] }
+export type RuleMap = { [key: string]: ValidationRule<any, any>[] }
 
 // Object validator
 
 export type ObjectSchema = {
-    [key: string]: ValidationRule<any, any> | ValidationRule<any, any>[]
+    [key: string]:
+        | ValidationRule<any, any>
+        | ValidationRule<any, any>[]
+        | ObjectSchema
 }
 
 export type ObjectData = { [key: string]: any }
@@ -83,14 +86,12 @@ export declare const notEmpty: notEmptyRuleConst
 
 export type TypeRuleRuleConstructor = RuleConstructor<any, any>
 
-export declare const string:  TypeRuleRuleConstructor
+export declare const string: TypeRuleRuleConstructor
 
-export declare const boolean:  TypeRuleRuleConstructor
+export declare const boolean: TypeRuleRuleConstructor
 
-export declare const decimal:  TypeRuleRuleConstructor
+export declare const decimal: TypeRuleRuleConstructor
 
-export declare const integer:  TypeRuleRuleConstructor
+export declare const integer: TypeRuleRuleConstructor
 
-export declare const number:  TypeRuleRuleConstructor
-
-
+export declare const number: TypeRuleRuleConstructor
