@@ -31,4 +31,3 @@ export const isoDate = () =>
         const d = new Date(x)
         return !isNaN(d.getTime())
     })
-

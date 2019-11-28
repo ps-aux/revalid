@@ -8,7 +8,6 @@ export type ValidationTestResult<ErrDetail> = {
     }
 }
 
-
 export type ValidationError<ErrDetail> = {
     code: string
     message: string
@@ -16,42 +15,42 @@ export type ValidationError<ErrDetail> = {
 }
 
 export type RuleEvaluator = {
-    <A, ErrDetail>(rule: ValidationRule<A, ErrDetail>, data: A): ValidationError<ErrDetail> | null
+    <A, ErrDetail>(
+        rule: ValidationRule<A, ErrDetail>,
+        data: A
+    ): ValidationError<ErrDetail> | null
 }
-
 
 export type ValidationRule<A, ErrDetail> = {
     name: string
     test: (val?: A) => ValidationTestResult<ErrDetail>
 }
 
-
 // Rule construction
 
 export type RuleConstructor<A, ErrDetail> = () => ValidationRule<A, ErrDetail>
 
-export type ConfRuleConstructor<A, ErrDetail, Config> = (conf: Config) => ValidationRule<A, ErrDetail>
+export type ConfRuleConstructor<A, ErrDetail, Config> = (
+    conf: Config
+) => ValidationRule<A, ErrDetail>
 
 // Object validation rule
 
 export type SchemaErrorDetail = {
-    attr: string,
-    value: any,
+    attr: string
+    value: any
     errors: ValidationError<any>[]
 }[]
-
 
 export type Data = { [key: string]: any }
 
 export type Schema = { [key: string]: ValidationRule<any, any>[] }
-
 
 // Object validator
 
 export type ObjectSchema = {
     [key: string]: ValidationRule<any, any> | ValidationRule<any, any>[]
 }
-
 
 export type ObjectData = { [key: string]: any }
 
@@ -68,11 +67,9 @@ export type ValidationErrors = {
     }
 }
 
-
 export type ObjectValidator = (data: ObjectData) => ValidationErrors | null
 
 export declare const Validator: (objSchema: ObjectSchema) => ObjectValidator
-
 
 // Rules impl
 
@@ -83,4 +80,3 @@ export declare const notNull: notNullRuleConst
 export type notEmptyRuleConst = RuleConstructor<string, any>
 
 export declare const notEmpty: notEmptyRuleConst
-

@@ -27,7 +27,8 @@ describe('matchesSchema', () => {
         expect(r).toMatchObject({
             passed: false,
             error: {
-                message: 'does not match schema Object with keys: foo,bar,baz,child',
+                message:
+                    'does not match schema Object with keys: foo,bar,baz,child',
                 detail: [
                     {
                         attr: 'bar'
@@ -37,9 +38,11 @@ describe('matchesSchema', () => {
                     },
                     {
                         attr: 'child',
-                        errors: [{
-                            code: 'matches-schema'
-                        }]
+                        errors: [
+                            {
+                                code: 'matches-schema'
+                            }
+                        ]
                     }
                 ]
             }

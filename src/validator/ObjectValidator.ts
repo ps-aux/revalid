@@ -1,7 +1,6 @@
 import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
 import { ObjectSchema, ObjectValidator, Schema, ValidationErrors } from 'types'
 
-
 const ensureArray = <A>(a: A | A[]): A[] => {
     if (Array.isArray(a)) return a
     return [a]

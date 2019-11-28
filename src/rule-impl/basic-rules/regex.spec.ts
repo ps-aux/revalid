@@ -2,7 +2,6 @@ import { ruleTestCases } from 'src/test/ruleTestCases'
 import { regex } from 'src/rule-impl/basic-rules/regex'
 
 describe('regex rule cases', () => {
-
     const rule = regex(/a/)
 
     ruleTestCases([

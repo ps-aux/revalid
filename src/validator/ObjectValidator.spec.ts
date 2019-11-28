@@ -11,9 +11,9 @@ const mustBe = (val: any): ValidationRule<any, any> => ({
             error: passed
                 ? undefined
                 : {
-                    message: 'is not',
-                    detail: 'detail'
-                }
+                      message: 'is not',
+                      detail: 'detail'
+                  }
         }
     }
 })
