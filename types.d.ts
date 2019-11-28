@@ -80,3 +80,17 @@ export declare const notNull: notNullRuleConst
 export type notEmptyRuleConst = RuleConstructor<string, any>
 
 export declare const notEmpty: notEmptyRuleConst
+
+export type TypeRuleRuleConstructor = RuleConstructor<any, any>
+
+export declare const string:  TypeRuleRuleConstructor
+
+export declare const boolean:  TypeRuleRuleConstructor
+
+export declare const decimal:  TypeRuleRuleConstructor
+
+export declare const integer:  TypeRuleRuleConstructor
+
+export declare const number:  TypeRuleRuleConstructor
+
+

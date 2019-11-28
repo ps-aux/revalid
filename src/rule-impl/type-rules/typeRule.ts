@@ -1,9 +1,9 @@
-import { RuleConstructor } from 'types'
+import { TypeRuleRuleConstructor } from 'types'
 
 const isTypeRule = (
     typeName: string,
     isType: (a: any) => boolean
-): RuleConstructor<any, any> => () => ({
+): TypeRuleRuleConstructor => () => ({
     name: `is-${typeName}`,
     test: (a?: any) => {
         if (a == null)
