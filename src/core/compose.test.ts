@@ -1,24 +1,26 @@
-import { ValidationRule, ValidationTestResult } from 'src'
+import { ValidationRule } from 'src'
 import { compose } from './compose'
 
-it('compose', () => {
+it('all rules are invoked', () => {
     const invocations: string[] = []
 
     const ruleA: ValidationRule<any, any> = {
         name: 'a',
-        test: (a?: any) => {
+        test: () => {
             invocations.push('a')
-            // @ts-ignore
-            return {} as ValidationTestResult
+            return {
+                passed: true
+            }
         }
     }
 
     const ruleB: ValidationRule<any, any> = {
         name: 'b',
-        test: (a?: any) => {
+        test: () => {
             invocations.push('b')
-            // @ts-ignore
-            return {} as ValidationTestResult
+            return {
+                passed: true
+            }
         }
     }
 
@@ -28,4 +30,29 @@ it('compose', () => {
 
     expect(composed.name).toBe('a & b')
     expect(invocations).toEqual(['a', 'b'])
+})
+
+it('returns first fail', () => {
+    const ruleA: ValidationRule<any, any> = {
+        name: 'a',
+        test: () => {
+            return {
+                passed: false
+            }
+        }
+    }
+
+    const mock = jest.fn()
+
+    const ruleB: ValidationRule<any, any> = {
+        name: 'b',
+        test: mock
+    }
+
+    const composed = compose([ruleA, ruleB])
+
+    const r = composed.test('abc')
+
+    expect(r.passed).toEqual(false)
+    expect(mock.mock.calls.length).toBe(0)
 })

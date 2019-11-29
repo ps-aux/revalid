@@ -1,4 +1,8 @@
-import { createObjectValidator, obj } from 'src/validator/ObjectValidator'
+import {
+    createObjectValidator,
+    obj,
+    required
+} from 'src/validator/ObjectValidator'
 import { ValidationRule } from 'types'
 import { notNull } from 'src/rule-impl/basic-rules/notNull'
 
@@ -24,19 +28,19 @@ describe('Validator', () => {
         const sut = createObjectValidator({
             a: mustBe(3),
             b: [mustBe('abc')],
-            c: [
-                obj({
-                    a: [notNull()]
-                }),
-                notNull()
-            ]
+            c: [obj({}), notNull()],
+            d: required({}),
+            e: {
+                a: [notNull()]
+            }
         })
 
         const res = sut({
-            b: 456
+            b: 456,
+            e: {}
         })
 
-        console.log('errors', res)
+        console.log('errors', JSON.stringify(res, null, 4))
 
         expect(res).toMatchObject({
             a: {
@@ -56,6 +60,37 @@ describe('Validator', () => {
                         code: 'must-be-abc',
                         message: 'is not',
                         detail: 'detail'
+                    }
+                ]
+            },
+            c: {
+                errors: [
+                    {
+                        code: 'not-null'
+                    }
+                ]
+            },
+            d: {
+                errors: [
+                    {
+                        code: 'not-null & matches-schema'
+                    }
+                ]
+            },
+            e: {
+                errors: [
+                    {
+                        code: 'matches-schema',
+                        detail: [
+                            {
+                                attr: 'a',
+                                errors: [
+                                    {
+                                        code: 'not-null'
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }

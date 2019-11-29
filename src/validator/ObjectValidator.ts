@@ -12,15 +12,9 @@ import { notNull } from 'src/rule-impl/basic-rules/notNull'
 const isRule = (a: any) =>
     typeof a.test === 'function' && typeof a.name === 'string'
 
-export const obj = (
-    s: ObjectSchema,
-    required?: boolean
-): ValidationRule<any, any> => {
-    const r = matchesSchema(toSchema(s))
-    if (!required) return r
+export const required = (s: ObjectSchema) => compose([notNull(), obj(s)])
 
-    return compose([notNull(), r])
-}
+export const obj = (s: ObjectSchema) => matchesSchema(toSchema(s))
 
 const toSchema = (objSchema: ObjectSchema): RuleMap => {
     const s: RuleMap = {}

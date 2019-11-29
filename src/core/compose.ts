@@ -8,18 +8,18 @@ export const compose = (
         name = rules.map(r => r.name).join(' & ')
     }
 
-    const test = rules.reduce(
-        (acc, r) => {
-            return v => {
-                acc(r)
-                r.test(v)
-            }
-        },
-        (x => {}) as (a?: any) => void
-    ) as (a?: any) => void
-
     return {
         name,
-        test
+        test: (v?: any) => {
+            for (const r of rules) {
+                const res = r.test(v)
+
+                if (!res.passed) return res
+            }
+
+            return {
+                passed: true
+            }
+        }
     }
 }

@@ -95,3 +95,5 @@ export declare const decimal: TypeRuleRuleConstructor
 export declare const integer: TypeRuleRuleConstructor
 
 export declare const number: TypeRuleRuleConstructor
+
+export declare const isoDate: TypeRuleRuleConstructor

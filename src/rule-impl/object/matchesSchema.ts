@@ -16,10 +16,8 @@ const testEntry = (
     // TODO support for early exit
     const errors: ValidationError<any>[] = []
 
-    console.log('testing', val, rules)
     rules.forEach(r => {
         const err = ruleEval(r, val)
-        console.log('   rule', r, err)
         if (err) errors.push(err)
     })
 
