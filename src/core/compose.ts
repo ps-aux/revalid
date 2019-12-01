@@ -1,9 +1,6 @@
-import { ValidationRule } from 'src'
+import { composeRulesFun } from 'src'
 
-export const compose = (
-    rules: ValidationRule<any, any>[],
-    name?: string
-): ValidationRule<any, any> => {
+export const compose: composeRulesFun = (rules, name) => {
     if (!name) {
         name = rules.map(r => r.name).join(' & ')
     }

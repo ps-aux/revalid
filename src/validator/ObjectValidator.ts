@@ -2,6 +2,7 @@ import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
 import {
     ObjectSchema,
     ObjectValidator,
+    ObjRuleRuleConstructor,
     RuleMap,
     ValidationErrors,
     ValidationRule
@@ -12,9 +13,10 @@ import { notNull } from 'src/rule-impl/basic-rules/notNull'
 const isRule = (a: any) =>
     typeof a.test === 'function' && typeof a.name === 'string'
 
-export const required = (s: ObjectSchema) => compose([notNull(), obj(s)])
+export const required: ObjRuleRuleConstructor = s =>
+    compose([notNull(), obj(s)])
 
-export const obj = (s: ObjectSchema) => matchesSchema(toSchema(s))
+export const obj: ObjRuleRuleConstructor = s => matchesSchema(toSchema(s))
 
 const toSchema = (objSchema: ObjectSchema): RuleMap => {
     const s: RuleMap = {}

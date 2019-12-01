@@ -76,6 +76,7 @@ export declare const Validator: (objSchema: ObjectSchema) => ObjectValidator
 
 // Rules impl
 
+// Basic
 export type notNullRuleConst = RuleConstructor<any, any>
 
 export declare const notNull: notNullRuleConst
@@ -84,6 +85,11 @@ export type notEmptyRuleConst = RuleConstructor<string, any>
 
 export declare const notEmpty: notEmptyRuleConst
 
+export type constantRuleType = ConfRuleConstructor<any, void, boolean>
+
+export declare const constant: constantRuleType
+
+// Types
 export type TypeRuleRuleConstructor = RuleConstructor<any, any>
 
 export declare const string: TypeRuleRuleConstructor
@@ -97,3 +103,30 @@ export declare const integer: TypeRuleRuleConstructor
 export declare const number: TypeRuleRuleConstructor
 
 export declare const isoDate: TypeRuleRuleConstructor
+
+// Container
+
+export type oneOfRuleConst = {
+    (vals: (string | number)[]): ValidationRule<string | number, any>
+}
+
+export declare const oneOf: oneOfRuleConst
+
+// Object
+export type ObjRuleRuleConstructor = ConfRuleConstructor<
+    Data,
+    SchemaErrorDetail,
+    ObjectSchema
+>
+
+export declare const obj: ObjRuleRuleConstructor
+
+export declare const required: ObjRuleRuleConstructor
+
+// Compose
+export declare type composeRulesFun = (
+    rules: ValidationRule<any, any>[],
+    name?: string
+) => ValidationRule<any, any>
+
+export declare const composeRules: composeRulesFun
