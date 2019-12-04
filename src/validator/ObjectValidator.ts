@@ -16,7 +16,11 @@ const isRule = (a: any) =>
 export const required: ObjRuleRuleConstructor = s =>
     compose([notNull(), obj(s)])
 
-export const obj: ObjRuleRuleConstructor = s => matchesSchema(toSchema(s))
+export const obj: ObjRuleRuleConstructor = s => {
+    const cons = matchesSchema(toSchema(s))
+
+    return cons
+}
 
 const toSchema = (objSchema: ObjectSchema): RuleMap => {
     const s: RuleMap = {}

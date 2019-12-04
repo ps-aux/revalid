@@ -1,7 +1,10 @@
-import { ConfRuleConstructor } from 'types'
+import { RegexRuleConst } from 'types'
 
-export const regex: ConfRuleConstructor<string, void, RegExp> = regex => ({
+const code = 'revalid/rule/basic/regex'
+
+export const regex: RegexRuleConst = regex => ({
     name: 'matches-regex',
+    code,
     test: (val?: string) => {
         if (val == null)
             return {
@@ -15,3 +18,5 @@ export const regex: ConfRuleConstructor<string, void, RegExp> = regex => ({
         }
     }
 })
+
+regex.code = code

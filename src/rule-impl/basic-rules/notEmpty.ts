@@ -1,7 +1,10 @@
-import { notNullRuleConst } from 'types'
+import { NotNullRuleConst } from 'types'
 
-export const notEmpty: notNullRuleConst = () => ({
+const code = 'revalid/rule/basic/not-empty'
+
+export const notEmpty: NotNullRuleConst = () => ({
     name: 'not-empty',
+    code,
     test: (s?: string) => {
         if (s && s.length > 0)
             return {
@@ -12,3 +15,5 @@ export const notEmpty: notNullRuleConst = () => ({
         }
     }
 })
+
+notEmpty.code = code

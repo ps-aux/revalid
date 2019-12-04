@@ -21,18 +21,25 @@ export type RuleEvaluator = {
     ): ValidationError<ErrDetail> | null
 }
 
+export type WithCode = {
+    code: string
+}
+
 export type ValidationRule<A, ErrDetail> = {
     name: string
+    code: string
     test: (val?: A) => ValidationTestResult<ErrDetail>
 }
 
 // Rule construction
 
-export type RuleConstructor<A, ErrDetail> = () => ValidationRule<A, ErrDetail>
+export type RuleConstructor<A, ErrDetail> = {
+    (): ValidationRule<A, ErrDetail>
+}
 
-export type ConfRuleConstructor<A, ErrDetail, Config> = (
-    conf: Config
-) => ValidationRule<A, ErrDetail>
+export type ConfRuleConstructor<A, ErrDetail, Config> = {
+    (conf: Config): ValidationRule<A, ErrDetail>
+}
 
 // Object validation rule
 
@@ -77,20 +84,26 @@ export declare const Validator: (objSchema: ObjectSchema) => ObjectValidator
 // Rules impl
 
 // Basic
-export type notNullRuleConst = RuleConstructor<any, any>
+export type NotNullRuleConst = RuleConstructor<any, any> & WithCode
 
-export declare const notNull: notNullRuleConst
+export declare const notNull: NotNullRuleConst
 
-export type notEmptyRuleConst = RuleConstructor<string, any>
+export type NotEmptyRuleConst = RuleConstructor<string, any> & WithCode
 
-export declare const notEmpty: notEmptyRuleConst
+export declare const notEmpty: NotEmptyRuleConst
 
-export type constantRuleType = ConfRuleConstructor<any, void, boolean>
+export type RegexRuleConst = ConfRuleConstructor<string, void, RegExp> &
+    WithCode
 
-export declare const constant: constantRuleType
+export declare const regex: RegexRuleConst
+
+export type ConstantRuleType = ConfRuleConstructor<any, void, boolean> &
+    WithCode
+
+export declare const constant: ConstantRuleType
 
 // Types
-export type TypeRuleRuleConstructor = RuleConstructor<any, any>
+export type TypeRuleRuleConstructor = RuleConstructor<any, any> & WithCode
 
 export declare const string: TypeRuleRuleConstructor
 
@@ -107,6 +120,7 @@ export declare const isoDate: TypeRuleRuleConstructor
 // Container
 
 export type oneOfRuleConst = {
+    code: string
     (vals: (string | number)[]): ValidationRule<string | number, any>
 }
 

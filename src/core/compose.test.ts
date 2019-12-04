@@ -6,6 +6,7 @@ it('all rules are invoked', () => {
 
     const ruleA: ValidationRule<any, any> = {
         name: 'a',
+        code: 'any',
         test: () => {
             invocations.push('a')
             return {
@@ -16,6 +17,7 @@ it('all rules are invoked', () => {
 
     const ruleB: ValidationRule<any, any> = {
         name: 'b',
+        code: 'any',
         test: () => {
             invocations.push('b')
             return {
@@ -35,6 +37,7 @@ it('all rules are invoked', () => {
 it('returns first fail', () => {
     const ruleA: ValidationRule<any, any> = {
         name: 'a',
+        code: 'any',
         test: () => {
             return {
                 passed: false
@@ -45,6 +48,7 @@ it('returns first fail', () => {
     const mock = jest.fn()
 
     const ruleB: ValidationRule<any, any> = {
+        code: 'any',
         name: 'b',
         test: mock
     }

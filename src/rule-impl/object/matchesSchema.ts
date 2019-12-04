@@ -29,6 +29,8 @@ const schemaToString = (s: RuleMap): string => {
     return `Object with keys: ${Object.keys(s).toString()}`
 }
 
+const code = 'revalid/rule/object/matches-schema'
+
 export const matchesSchema = (
     schema: RuleMap
 ): ValidationRule<Data, SchemaErrorDetail> => {
@@ -36,6 +38,7 @@ export const matchesSchema = (
 
     return {
         name: 'matches-schema',
+        code,
         test: (data?: Data) => {
             if (!data)
                 return {

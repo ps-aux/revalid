@@ -7,6 +7,7 @@ export const compose: composeRulesFun = (rules, name) => {
 
     return {
         name,
+        code: name,
         test: (v?: any) => {
             for (const r of rules) {
                 const res = r.test(v)

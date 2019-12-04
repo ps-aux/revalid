@@ -8,6 +8,7 @@ import { notNull } from 'src/rule-impl/basic-rules/notNull'
 
 const mustBe = (val: any): ValidationRule<any, any> => ({
     name: `must-be-${val}`,
+    code: 'any',
     test: x => {
         const passed = x === val
 

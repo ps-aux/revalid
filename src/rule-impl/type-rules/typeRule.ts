@@ -3,18 +3,26 @@ import { TypeRuleRuleConstructor } from 'types'
 const isTypeRule = (
     typeName: string,
     isType: (a: any) => boolean
-): TypeRuleRuleConstructor => () => ({
-    name: `is-${typeName}`,
-    test: (a?: any) => {
-        if (a == null)
+): TypeRuleRuleConstructor => {
+    const code = `revalid/rules/type/is-${typeName}`
+    const cons = () => ({
+        name: `is-${typeName}`,
+        code,
+        test: (a?: any) => {
+            if (a == null)
+                return {
+                    passed: true
+                }
             return {
-                passed: true
+                passed: isType(a)
             }
-        return {
-            passed: isType(a)
         }
-    }
-})
+    })
+
+    cons.code = code
+
+    return cons
+}
 
 export const number = isTypeRule('number', x => typeof x === 'number')
 

@@ -1,5 +1,7 @@
 import { oneOfRuleConst } from 'types'
 
+const code = 'revalid/rule/container/one-of'
+
 export const oneOf: oneOfRuleConst = vals => {
     const str = `[${vals.join(',')}]`
 
@@ -11,6 +13,7 @@ export const oneOf: oneOfRuleConst = vals => {
 
     return {
         name: `one-of-${str}`,
+        code,
         test: (val?: any) => {
             if (val == null)
                 return {
@@ -30,3 +33,5 @@ export const oneOf: oneOfRuleConst = vals => {
         }
     }
 }
+
+oneOf.code = code

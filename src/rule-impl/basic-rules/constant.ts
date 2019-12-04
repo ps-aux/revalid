@@ -1,7 +1,10 @@
-import { constantRuleType } from 'types'
+import { ConstantRuleType } from 'types'
 
-export const constant: constantRuleType = val => ({
+const code = 'revalid/rule/basic/constant'
+
+export const constant: ConstantRuleType = val => ({
     name: `constant-${val}`,
+    code,
     test: () => {
         const passed = val
         return {
@@ -9,3 +12,5 @@ export const constant: constantRuleType = val => ({
         }
     }
 })
+
+constant.code = code

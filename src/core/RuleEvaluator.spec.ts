@@ -3,6 +3,7 @@ import { ValidationRule } from 'types'
 
 const mustBeFoo: ValidationRule<string, any> = {
     name: 'must-be-foo',
+    code: 'any',
     test: x => {
         const passed = x === 'foo'
 
