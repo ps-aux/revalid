@@ -1,5 +1,5 @@
 import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
-import { number, string } from 'src/rule-impl/type-rules/typeRule'
+import { number, string } from 'src/rule-impl/type-rules/simpleTypeRules'
 import { notNull } from 'src/rule-impl/basic-rules/notNull'
 import { notEmpty } from 'src/rule-impl/basic-rules/notEmpty'
 

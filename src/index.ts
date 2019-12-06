@@ -10,10 +10,12 @@ export {
     integer,
     isoDate,
     number
-} from 'src/rule-impl/type-rules/typeRule'
+} from 'src/rule-impl/type-rules/simpleTypeRules'
 
 export { obj, required } from 'src/validator/ObjectValidator'
 export { compose as composeRules } from 'src/core/compose'
 export { oneOf } from 'src/rule-impl/container-rules/oneOf'
+export { listOf } from 'src/rule-impl/container-rules/listOf'
+export { eq } from 'src/rule-impl/basic-rules/eq'
 
 export { createObjectValidator as Validator }

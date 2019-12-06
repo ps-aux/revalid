@@ -31,6 +31,10 @@ export type ValidationRule<A, ErrDetail> = {
     test: (val?: A) => ValidationTestResult<ErrDetail>
 }
 
+export type AnyErrDetail = any
+
+export type NoErrDetail = void
+
 // Rule construction
 
 export type RuleConstructor<A, ErrDetail> = {
@@ -46,19 +50,19 @@ export type ConfRuleConstructor<A, ErrDetail, Config> = {
 export type SchemaErrorDetail = {
     attr: string
     value: any
-    errors: ValidationError<any>[]
+    errors: ValidationError<AnyErrDetail>[]
 }[]
 
 export type Data = { [key: string]: any }
 
-export type RuleMap = { [key: string]: ValidationRule<any, any>[] }
+export type RuleMap = { [key: string]: ValidationRule<any, AnyErrDetail>[] }
 
 // Object validator
 
 export type ObjectSchema = {
     [key: string]:
-        | ValidationRule<any, any>
-        | ValidationRule<any, any>[]
+        | ValidationRule<any, AnyErrDetail>
+        | ValidationRule<any, AnyErrDetail>[]
         | ObjectSchema
 }
 
@@ -84,26 +88,31 @@ export declare const Validator: (objSchema: ObjectSchema) => ObjectValidator
 // Rules impl
 
 // Basic
-export type NotNullRuleConst = RuleConstructor<any, any> & WithCode
+export type NotNullRuleConst = RuleConstructor<any, AnyErrDetail> & WithCode
 
 export declare const notNull: NotNullRuleConst
 
-export type NotEmptyRuleConst = RuleConstructor<string, any> & WithCode
+export type NotEmptyRuleConst = RuleConstructor<string, AnyErrDetail> & WithCode
 
 export declare const notEmpty: NotEmptyRuleConst
 
-export type RegexRuleConst = ConfRuleConstructor<string, void, RegExp> &
+export type RegexRuleConst = ConfRuleConstructor<string, NoErrDetail, RegExp> &
     WithCode
 
 export declare const regex: RegexRuleConst
 
-export type ConstantRuleType = ConfRuleConstructor<any, void, boolean> &
+export type ConstantRuleType = ConfRuleConstructor<any, NoErrDetail, boolean> &
     WithCode
 
 export declare const constant: ConstantRuleType
 
+export type EqRuleConst = ConfRuleConstructor<any, NoErrDetail, any> & WithCode
+
+export declare const eq: EqRuleConst
+
 // Types
-export type TypeRuleRuleConstructor = RuleConstructor<any, any> & WithCode
+export type TypeRuleRuleConstructor = RuleConstructor<any, AnyErrDetail> &
+    WithCode
 
 export declare const string: TypeRuleRuleConstructor
 
@@ -121,10 +130,17 @@ export declare const isoDate: TypeRuleRuleConstructor
 
 export type oneOfRuleConst = {
     code: string
-    (vals: (string | number)[]): ValidationRule<string | number, any>
+    (vals: (string | number)[]): ValidationRule<string | number, AnyErrDetail>
 }
 
 export declare const oneOf: oneOfRuleConst
+
+export type listOfRuleConst = {
+    code: string
+    (rule: ValidationRule<any, any>): ValidationRule<any[], AnyErrDetail>
+}
+
+export declare const listOf: listOfRuleConst
 
 // Object
 export type ObjRuleRuleConstructor = ConfRuleConstructor<
@@ -139,8 +155,8 @@ export declare const required: ObjRuleRuleConstructor
 
 // Compose
 export declare type composeRulesFun = (
-    rules: ValidationRule<any, any>[],
+    rules: ValidationRule<any, AnyErrDetail>[],
     name?: string
-) => ValidationRule<any, any>
+) => ValidationRule<any, AnyErrDetail>
 
 export declare const composeRules: composeRulesFun
