@@ -1,6 +1,7 @@
-import { obj, objectValidator, required } from 'src/validator/ObjectValidator'
 import { notNull } from 'src/rule-impl/basic-rules/notNull'
 import { ValidationRule } from 'src'
+import { objectValidator } from './ObjectValidator'
+import { obj } from 'src/rule-impl/object/obj'
 
 const mustBe = (val: any): ValidationRule<any, any> => ({
     name: `must-be-${val}`,
@@ -23,13 +24,15 @@ const mustBe = (val: any): ValidationRule<any, any> => ({
 describe('Validator', () => {
     it('basic test case', () => {
         const sut = objectValidator({
-            a: mustBe(3),
+            a: [mustBe(3)],
             b: [mustBe('abc')],
             c: [obj({}), notNull()],
-            d: required({}),
-            e: {
-                a: [notNull()]
-            }
+            d: [notNull(), obj({})],
+            e: [
+                obj({
+                    a: [notNull()]
+                })
+            ]
         })
 
         const res = sut({
@@ -70,7 +73,7 @@ describe('Validator', () => {
             d: {
                 errors: [
                     {
-                        code: 'not-null & matches-schema'
+                        code: 'not-null'
                     }
                 ]
             },

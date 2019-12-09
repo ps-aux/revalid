@@ -2,7 +2,7 @@ import { ruleTestCases } from 'src/test/ruleTestCases'
 import { listOf } from 'src/rule-impl/container-rules/listOf'
 import { eq } from 'src/rule-impl/basic-rules/eq'
 
-describe('oneOf rule cases', () => {
+describe('listOf rule cases', () => {
     ruleTestCases([
         {
             rule: listOf(eq(4)),

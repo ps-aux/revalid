@@ -1,18 +1,26 @@
-import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
 import { number, string } from 'src/rule-impl/type-rules/simpleTypeRules'
 import { notNull } from 'src/rule-impl/basic-rules/notNull'
 import { notEmpty } from 'src/rule-impl/basic-rules/notEmpty'
+import { listOf } from 'src/rule-impl/container-rules/listOf'
+import { obj } from 'src/rule-impl/object/obj'
 
 describe('matchesSchema', () => {
     it('basic case', () => {
-        const rule = matchesSchema({
+        const rule = obj({
             foo: [notNull(), string()],
             bar: [notNull(), number()],
             baz: [notNull(), string()],
             child: [
-                matchesSchema({
+                obj({
                     name: [notEmpty()]
                 })
+            ],
+            items: [
+                listOf(
+                    obj({
+                        foo: [notNull()]
+                    })
+                )
             ]
         })
 
@@ -20,7 +28,8 @@ describe('matchesSchema', () => {
             foo: 'abc',
             bar: 'not-string',
             // baz missing
-            child: {}
+            child: {},
+            items: [{}]
         })
 
         // console.log(JSON.stringify(r, null, 4))
@@ -28,7 +37,7 @@ describe('matchesSchema', () => {
             passed: false,
             error: {
                 message:
-                    'does not match schema Object with keys: foo,bar,baz,child',
+                    'does not match schema Object with keys: foo,bar,baz,child,items',
                 detail: [
                     {
                         attr: 'bar'
@@ -41,6 +50,16 @@ describe('matchesSchema', () => {
                         errors: [
                             {
                                 code: 'matches-schema'
+                            }
+                        ]
+                    },
+                    {
+                        attr: 'items',
+                        errors: [
+                            {
+                                code: 'list-of-matches-schema',
+                                message:
+                                    'Item at index 0 does not pass rule matches-schema'
                             }
                         ]
                     }

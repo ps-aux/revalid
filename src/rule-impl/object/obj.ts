@@ -31,7 +31,7 @@ const schemaToString = (s: RuleMap): string => {
 
 const code = 'revalid/rule/object/matches-schema'
 
-export const matchesSchema = (
+export const obj = (
     schema: RuleMap
 ): ValidationRule<Data, SchemaErrorDetail> => {
     const ruleEval = evalRule

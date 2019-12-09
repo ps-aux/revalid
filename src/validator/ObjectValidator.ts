@@ -1,54 +1,12 @@
-import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
-import {
-    ObjectSchema,
-    ObjectValidationErrors,
-    ObjectValidator,
-    ObjRuleRuleConstructor,
-    RuleMap,
-    ValidationRule
-} from 'types'
-import { compose } from 'src/core/compose'
-import { notNull } from 'src/rule-impl/basic-rules/notNull'
+import { ObjectValidationErrors, ObjectValidator, RuleMap } from 'types'
+import { obj } from 'src/rule-impl/object/obj'
 
-const isRule = (a: any) =>
-    typeof a.test === 'function' && typeof a.name === 'string'
-
-export const required: ObjRuleRuleConstructor = s =>
-    compose([notNull(), obj(s)])
-
-export const obj: ObjRuleRuleConstructor = s => {
-    const cons = matchesSchema(toSchema(s))
-
-    return cons
-}
-
-const toSchema = (objSchema: ObjectSchema): RuleMap => {
-    const s: RuleMap = {}
-
-    Object.entries(objSchema).forEach(([key, val]) => {
-        let rules: ValidationRule<any, any>[]
-
-        if (Array.isArray(val)) {
-            rules = val
-        } else if (isRule(val)) {
-            rules = [val as ValidationRule<any, any>]
-        } else {
-            const s = val as ObjectSchema
-            rules = [obj(s)]
-        }
-
-        s[key] = rules
-    })
-
-    return s
-}
-
-export const objectValidator = (def: ObjectSchema): ObjectValidator => {
+export const objectValidator = (def: RuleMap): ObjectValidator => {
     return d => {
-        const schema = toSchema(def)
+        // TODO if we want less verbose api we can transform more user friendly input into def here
+        const rule = obj(def)
 
-        const rule = matchesSchema(schema)
-
+        // @ts-ignore
         const res = rule.test(d)
 
         if (res.passed) return null

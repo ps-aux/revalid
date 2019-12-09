@@ -91,45 +91,6 @@ export declare const Validator: CreateObjectValidator
 
 export declare const objectValidator: CreateObjectValidator
 
-export type ListValidationErrors = {
-    [key: number]: {
-        errors: ObjectValidationErrors
-        value: any
-    }
-}
-
-// List validator
-
-export type ListValidator = (data?: any[]) => ListValidationErrors | null
-
-export type ListSchema = {
-    itemSchema: ObjectSchema
-}
-
-export type CreateListValidator = (s: ListSchema) => ListValidator
-
-export declare const listValidator: CreateListValidator
-
-// Json validator
-
-export type JsonSchema = {
-    type: 'list' | 'object'
-    schema: ObjectSchema | ListSchema
-}
-
-export type JsonData = ObjectData | any[]
-
-export type JsonValidationErrors =
-    | ObjectValidationErrors
-    | ListValidationErrors
-    | null
-
-export type JsonValidator = (data: JsonData) => JsonValidationErrors
-
-export type CreateJsonValidator = (schema: JsonSchema) => JsonValidator
-
-export declare const jsonValidator: CreateJsonValidator
-
 // Rules impl
 
 // Basic
@@ -201,10 +162,6 @@ export type ObjRuleRuleConstructor = ConfRuleConstructor<
     SchemaErrorDetail,
     ObjectSchema
 >
-
-export declare const obj: ObjRuleRuleConstructor
-
-export declare const required: ObjRuleRuleConstructor
 
 // Compose
 export declare type composeRulesFun = (
