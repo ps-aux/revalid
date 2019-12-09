@@ -1,10 +1,6 @@
-import {
-    createObjectValidator,
-    obj,
-    required
-} from 'src/validator/ObjectValidator'
+import { obj, objectValidator, required } from 'src/validator/ObjectValidator'
 import { notNull } from 'src/rule-impl/basic-rules/notNull'
-import { ValidationRule, listOf, integer } from 'src'
+import { ValidationRule } from 'src'
 
 const mustBe = (val: any): ValidationRule<any, any> => ({
     name: `must-be-${val}`,
@@ -26,7 +22,7 @@ const mustBe = (val: any): ValidationRule<any, any> => ({
 
 describe('Validator', () => {
     it('basic test case', () => {
-        const sut = createObjectValidator({
+        const sut = objectValidator({
             a: mustBe(3),
             b: [mustBe('abc')],
             c: [obj({}), notNull()],
@@ -94,27 +90,6 @@ describe('Validator', () => {
                         ]
                     }
                 ]
-            }
-        })
-    })
-
-    it('array', () => {
-        const sut = createObjectValidator(listOf(integer()))
-
-        const res = sut(['a', 'b', 'c'])
-
-        expect(res).toMatchObject({
-            // eslint-disable-next-line quote-props
-            '0': {
-                errors: [
-                    {
-                        code: 'revalid/rule/container/list-of',
-                        message:
-                            'Item at index 0 does not pass rule is-integer',
-                        detail: { item: 'a', index: 0 }
-                    }
-                ],
-                value: ['a', 'b', 'c']
             }
         })
     })

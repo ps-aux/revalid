@@ -1,12 +1,10 @@
 import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
 import {
-    ListOfRule,
-    ObjectData,
     ObjectSchema,
+    ObjectValidationErrors,
     ObjectValidator,
     ObjRuleRuleConstructor,
     RuleMap,
-    ValidationErrors,
     ValidationRule
 } from 'types'
 import { compose } from 'src/core/compose'
@@ -45,53 +43,7 @@ const toSchema = (objSchema: ObjectSchema): RuleMap => {
     return s
 }
 
-export const createObjectValidator = (def: ObjectSchema): ObjectValidator => {
-    // If it is validation rule (for an array input)
-    if (def.name && def.code && def.test) {
-        // @ts-ignore
-        const listRule: ListOfRule = def
-
-        return (vals?: ObjectData) => {
-            // TODO, can we do better ? That input is array should be checked by the rule
-            const res = listRule.test(vals as any[])
-            if (res.passed) return null
-
-            const error = res.error!
-
-            const detail = error.detail
-            if (!detail) {
-                return {
-                    list: {
-                        errors: [
-                            {
-                                code: listRule.code,
-                                message: error.message,
-                                detail: detail
-                            }
-                        ],
-                        value: vals
-                    }
-                }
-            }
-
-            const errs: ValidationErrors = {
-                // TODO improve
-                [`${detail.index}`]: {
-                    errors: [
-                        {
-                            code: listRule.code,
-                            message: error.message,
-                            detail: detail
-                        }
-                    ],
-                    value: vals
-                }
-            }
-
-            return errs
-        }
-    }
-
+export const objectValidator = (def: ObjectSchema): ObjectValidator => {
     return d => {
         const schema = toSchema(def)
 
@@ -103,7 +55,7 @@ export const createObjectValidator = (def: ObjectSchema): ObjectValidator => {
 
         const errors = res.error!.detail
 
-        const errRes: ValidationErrors = {}
+        const errRes: ObjectValidationErrors = {}
 
         errors.forEach(err => {
             errRes[err.attr] = {

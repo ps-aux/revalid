@@ -59,33 +59,76 @@ export type RuleMap = { [key: string]: ValidationRule<any, AnyErrDetail>[] }
 
 // Object validator
 
-export type ObjectSchema =
-    | {
-          [key: string]:
-              | ValidationRule<any, AnyErrDetail>
-              | ValidationRule<any, AnyErrDetail>[]
-              | ObjectSchema
-      }
-    | ListOfRule
+export type ObjectSchema = {
+    [key: string]:
+        | ValidationRule<any, AnyErrDetail>
+        | ValidationRule<any, AnyErrDetail>[]
+        | ObjectSchema
+}
 
-export type ObjectData = { [key: string]: any } | any[]
+export type ObjectData = { [key: string]: any }
 
-export type DataValidationError = {
+export type AttrValidationError = {
     code: string
     message: string
     detail: any
 }
 
-export type ValidationErrors = {
+export type ObjectValidationErrors = {
     [key: string]: {
         value: any
-        errors: DataValidationError[]
+        errors: AttrValidationError[]
     }
 }
 
-export type ObjectValidator = (data: ObjectData) => ValidationErrors | null
+export type ObjectValidator = (
+    data: ObjectData
+) => ObjectValidationErrors | null
 
-export declare const Validator: (objSchema: ObjectSchema) => ObjectValidator
+export type CreateObjectValidator = (objSchema: ObjectSchema) => ObjectValidator
+
+export declare const Validator: CreateObjectValidator
+
+export declare const objectValidator: CreateObjectValidator
+
+export type ListValidationErrors = {
+    [key: number]: {
+        errors: ObjectValidationErrors
+        value: any
+    }
+}
+
+// List validator
+
+export type ListValidator = (data?: any[]) => ListValidationErrors | null
+
+export type ListSchema = {
+    itemSchema: ObjectSchema
+}
+
+export type CreateListValidator = (s: ListSchema) => ListValidator
+
+export declare const listValidator: CreateListValidator
+
+// Json validator
+
+export type JsonSchema = {
+    type: 'list' | 'object'
+    schema: ObjectSchema | ListSchema
+}
+
+export type JsonData = ObjectData | any[]
+
+export type JsonValidationErrors =
+    | ObjectValidationErrors
+    | ListValidationErrors
+    | null
+
+export type JsonValidator = (data: JsonData) => JsonValidationErrors
+
+export type CreateJsonValidator = (schema: JsonSchema) => JsonValidator
+
+export declare const jsonValidator: CreateJsonValidator
 
 // Rules impl
 
