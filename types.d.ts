@@ -59,14 +59,16 @@ export type RuleMap = { [key: string]: ValidationRule<any, AnyErrDetail>[] }
 
 // Object validator
 
-export type ObjectSchema = {
-    [key: string]:
-        | ValidationRule<any, AnyErrDetail>
-        | ValidationRule<any, AnyErrDetail>[]
-        | ObjectSchema
-}
+export type ObjectSchema =
+    | {
+          [key: string]:
+              | ValidationRule<any, AnyErrDetail>
+              | ValidationRule<any, AnyErrDetail>[]
+              | ObjectSchema
+      }
+    | ListOfRule
 
-export type ObjectData = { [key: string]: any }
+export type ObjectData = { [key: string]: any } | any[]
 
 export type DataValidationError = {
     code: string
@@ -135,9 +137,17 @@ export type oneOfRuleConst = {
 
 export declare const oneOf: oneOfRuleConst
 
+export type ListOfRuleErrorDetail = {
+    index: number
+    item: any
+    error: any
+} | null // If object is not a list
+
+export type ListOfRule = ValidationRule<any[], ListOfRuleErrorDetail>
+
 export type listOfRuleConst = {
     code: string
-    (rule: ValidationRule<any, any>): ValidationRule<any[], AnyErrDetail>
+    (rule: ValidationRule<any, any>): ListOfRule
 }
 
 export declare const listOf: listOfRuleConst

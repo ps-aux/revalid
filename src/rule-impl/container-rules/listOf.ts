@@ -33,6 +33,7 @@ export const listOf: listOfRuleConst = rule => {
                             message: `Item at index ${i} does not pass rule ${rule.name}`,
                             detail: {
                                 item,
+                                index: i,
                                 error: res.error
                             }
                         }

@@ -1,5 +1,7 @@
 import { matchesSchema } from 'src/rule-impl/object/matchesSchema'
 import {
+    ListOfRule,
+    ObjectData,
     ObjectSchema,
     ObjectValidator,
     ObjRuleRuleConstructor,
@@ -43,11 +45,55 @@ const toSchema = (objSchema: ObjectSchema): RuleMap => {
     return s
 }
 
-export const createObjectValidator = (
-    objSchema: ObjectSchema
-): ObjectValidator => {
+export const createObjectValidator = (def: ObjectSchema): ObjectValidator => {
+    // If it is validation rule (for an array input)
+    if (def.name && def.code && def.test) {
+        // @ts-ignore
+        const listRule: ListOfRule = def
+
+        return (vals?: ObjectData) => {
+            // TODO, can we do better ? That input is array should be checked by the rule
+            const res = listRule.test(vals as any[])
+            if (res.passed) return {}
+
+            const error = res.error!
+
+            const detail = error.detail
+            if (!detail) {
+                return {
+                    list: {
+                        errors: [
+                            {
+                                code: listRule.code,
+                                message: error.message,
+                                detail: detail
+                            }
+                        ],
+                        value: vals
+                    }
+                }
+            }
+
+            const errs: ValidationErrors = {
+                // TODO improve
+                [`${detail.index}`]: {
+                    errors: [
+                        {
+                            code: listRule.code,
+                            message: error.message,
+                            detail: detail
+                        }
+                    ],
+                    value: vals
+                }
+            }
+
+            return errs
+        }
+    }
+
     return d => {
-        const schema = toSchema(objSchema)
+        const schema = toSchema(def)
 
         const rule = matchesSchema(schema)
 
