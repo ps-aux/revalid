@@ -54,7 +54,7 @@ export const createObjectValidator = (def: ObjectSchema): ObjectValidator => {
         return (vals?: ObjectData) => {
             // TODO, can we do better ? That input is array should be checked by the rule
             const res = listRule.test(vals as any[])
-            if (res.passed) return {}
+            if (res.passed) return null
 
             const error = res.error!
 
