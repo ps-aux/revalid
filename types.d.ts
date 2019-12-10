@@ -59,13 +59,6 @@ export type RuleMap = { [key: string]: ValidationRule<any, AnyErrDetail>[] }
 
 // Object validator
 
-export type ObjectSchema = {
-    [key: string]:
-        | ValidationRule<any, AnyErrDetail>
-        | ValidationRule<any, AnyErrDetail>[]
-        | ObjectSchema
-}
-
 export type ObjectData = { [key: string]: any }
 
 export type AttrValidationError = {
@@ -85,7 +78,7 @@ export type ObjectValidator = (
     data: ObjectData
 ) => ObjectValidationErrors | null
 
-export type CreateObjectValidator = (objSchema: ObjectSchema) => ObjectValidator
+export type CreateObjectValidator = (schema: RuleMap) => ObjectValidator
 
 export declare const objectValidator: CreateObjectValidator
 
@@ -162,13 +155,6 @@ export type ObjRuleConst = {
 }
 
 export declare const obj: ObjRuleConst
-
-// Object
-export type ObjRuleRuleConstructor = ConfRuleConstructor<
-    Data,
-    SchemaErrorDetail,
-    ObjectSchema
->
 
 // Compose
 export declare type composeRulesFun = (
