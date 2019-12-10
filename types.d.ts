@@ -154,6 +154,15 @@ export type listOfRuleConst = {
 
 export declare const listOf: listOfRuleConst
 
+export type ObjRule = ValidationRule<Data, SchemaErrorDetail>
+
+export type ObjRuleConst = {
+    code: string
+    (schema: RuleMap): ObjRule
+}
+
+export declare const obj: ObjRuleConst
+
 // Object
 export type ObjRuleRuleConstructor = ConfRuleConstructor<
     Data,

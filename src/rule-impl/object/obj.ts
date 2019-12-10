@@ -1,6 +1,7 @@
 import { evalRule } from 'src/core/RuleEvaluator'
 import {
     Data,
+    ObjRuleConst,
     RuleEvaluator,
     RuleMap,
     SchemaErrorDetail,
@@ -31,9 +32,7 @@ const schemaToString = (s: RuleMap): string => {
 
 const code = 'revalid/rule/object/matches-schema'
 
-export const obj = (
-    schema: RuleMap
-): ValidationRule<Data, SchemaErrorDetail> => {
+export const obj: ObjRuleConst = schema => {
     const ruleEval = evalRule
 
     return {
@@ -75,3 +74,5 @@ export const obj = (
         }
     }
 }
+
+obj.code = code
