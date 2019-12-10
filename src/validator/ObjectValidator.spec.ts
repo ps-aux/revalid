@@ -2,6 +2,7 @@ import { notNull } from 'src/rule-impl/basic-rules/notNull'
 import { ValidationRule } from 'src'
 import { objectValidator } from './ObjectValidator'
 import { obj } from 'src/rule-impl/object/obj'
+import { listOf } from 'src/rule-impl/container-rules/listOf'
 
 const mustBe = (val: any): ValidationRule<any, any> => ({
     name: `must-be-${val}`,
@@ -25,7 +26,7 @@ describe('Validator', () => {
     it('basic test case', () => {
         const sut = objectValidator({
             a: [mustBe(3)],
-            b: [mustBe('abc')],
+            b: [listOf(mustBe('abc'))],
             c: [obj({}), notNull()],
             d: [notNull(), obj({})],
             e: [
@@ -36,7 +37,7 @@ describe('Validator', () => {
         })
 
         const res = sut({
-            b: 456,
+            b: [456],
             e: {}
         })
 
@@ -54,12 +55,12 @@ describe('Validator', () => {
                 ]
             },
             b: {
-                value: 456,
+                value: [456],
                 errors: [
                     {
-                        code: 'must-be-abc',
-                        message: 'is not',
-                        detail: 'detail'
+                        code: 'list-of-must-be-abc',
+                        message:
+                            'Item at index 0 does not pass rule must-be-abc'
                     }
                 ]
             },

@@ -13,3 +13,4 @@ export {
 export { compose as composeRules } from 'src/core/compose'
 export { oneOf } from 'src/rule-impl/container-rules/oneOf'
 export { eq } from 'src/rule-impl/basic-rules/eq'
+export { objectValidator } from 'src/validator/ObjectValidator'

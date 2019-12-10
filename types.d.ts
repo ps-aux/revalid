@@ -87,8 +87,6 @@ export type ObjectValidator = (
 
 export type CreateObjectValidator = (objSchema: ObjectSchema) => ObjectValidator
 
-export declare const Validator: CreateObjectValidator
-
 export declare const objectValidator: CreateObjectValidator
 
 // Rules impl
