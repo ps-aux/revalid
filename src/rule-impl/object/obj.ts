@@ -44,6 +44,23 @@ export const obj: ObjRuleConst = schema => {
                     passed: true
                 }
 
+            if (Array.isArray(data)) {
+                return {
+                    passed: false,
+                    // TODO is it proper error ?
+                    error: {
+                        message: 'Input is an Array not an object',
+                        detail: [
+                            {
+                                attr: '.',
+                                value: data,
+                                errors: []
+                            }
+                        ]
+                    }
+                }
+            }
+
             const errors: SchemaErrorDetail = []
 
             Object.entries(schema).forEach(([key, rules]) => {
