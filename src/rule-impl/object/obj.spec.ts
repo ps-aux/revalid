@@ -49,7 +49,7 @@ describe('matchesSchema', () => {
                         attr: 'child',
                         errors: [
                             {
-                                code: 'matches-schema'
+                                code: obj.code
                             }
                         ]
                     },
@@ -57,7 +57,7 @@ describe('matchesSchema', () => {
                         attr: 'items',
                         errors: [
                             {
-                                code: 'list-of-matches-schema',
+                                code: listOf.code,
                                 message:
                                     'Item at index 0 does not pass rule matches-schema'
                             }
