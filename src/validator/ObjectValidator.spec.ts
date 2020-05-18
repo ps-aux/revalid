@@ -6,7 +6,7 @@ import { listOf } from 'src/rule-impl/container-rules/listOf'
 
 const mustBe = (val: any): ValidationRule<any, any> => ({
     name: `must-be-${val}`,
-    code: 'any',
+    code: 'must-be',
     test: x => {
         const passed = x === val
 
@@ -48,7 +48,7 @@ describe('Validator', () => {
                 value: undefined,
                 errors: [
                     {
-                        code: 'must-be-3',
+                        code: 'must-be',
                         message: 'is not',
                         detail: 'detail'
                     }
@@ -58,7 +58,7 @@ describe('Validator', () => {
                 value: [456],
                 errors: [
                     {
-                        code: 'list-of-must-be-abc',
+                        code: listOf.code,
                         message:
                             'Item at index 0 does not pass rule must-be-abc'
                     }
@@ -67,27 +67,27 @@ describe('Validator', () => {
             c: {
                 errors: [
                     {
-                        code: 'not-null'
+                        code: notNull.code
                     }
                 ]
             },
             d: {
                 errors: [
                     {
-                        code: 'not-null'
+                        code: notNull.code
                     }
                 ]
             },
             e: {
                 errors: [
                     {
-                        code: 'matches-schema',
+                        code: obj.code,
                         detail: [
                             {
                                 attr: 'a',
                                 errors: [
                                     {
-                                        code: 'not-null'
+                                        code: notNull.code
                                     }
                                 ]
                             }

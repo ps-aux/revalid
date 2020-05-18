@@ -10,7 +10,7 @@ export const evalRule: RuleEvaluator = <A, ErrDetail>(
 
     const err = res.error
     return {
-        code: rule.name,
+        code: rule.code,
         message: err ? err!.message : `Does not pass rule '${rule.name}'`,
         // TODO
         detail: (err && err!.detail) as ErrDetail
