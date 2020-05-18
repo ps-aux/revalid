@@ -1,6 +1,7 @@
 export { notEmpty } from 'src/rule-impl/basic-rules/notEmpty'
 export { notNull } from 'src/rule-impl/basic-rules/notNull'
 export { constant } from 'src/rule-impl/basic-rules/constant'
+export { regex } from 'src/rule-impl/basic-rules/regex'
 export {
     string,
     boolean,
