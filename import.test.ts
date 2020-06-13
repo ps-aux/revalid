@@ -13,8 +13,7 @@ import {
     listOf,
     oneOf,
     obj,
-    objectValidator,
-    composeRules
+    objectValidator
 } from 'src'
 
 const imports = [
@@ -32,8 +31,7 @@ const imports = [
     oneOf,
     listOf,
     obj,
-    objectValidator,
-    composeRules
+    objectValidator
 ]
 
 it('declared imports are defined', () => {

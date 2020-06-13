@@ -5,25 +5,20 @@ import {
     NotNullRuleConst,
     RegexRuleConst,
     TypeRuleRuleConstructor,
-    AnyErrDetail,
     ValidationError,
     ValidationRule,
     ListOfRuleConst,
     OneOfRuleConst,
     ObjectData,
-    AttrValidationError,
-    ObjectValidationErrors,
+    ObjectValidationErrorResult,
     ObjectValidator,
-    CreateObjectValidator,
-    ComposeRulesFun
+    CreateObjectValidator
 } from 'src'
 
 type Test = {
     core: {
-        an: AnyErrDetail
         ve: ValidationError<any>
         vr: ValidationRule<any, any>
-        compose: ComposeRulesFun
     }
     rules: {
         basic: {
@@ -42,8 +37,7 @@ type Test = {
         }
         object: {
             data: ObjectData
-            attrValError: AttrValidationError
-            objValErrors: ObjectValidationErrors
+            objValErrors: ObjectValidationErrorResult
             validator: ObjectValidator
             create: CreateObjectValidator
         }

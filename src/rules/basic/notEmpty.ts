@@ -1,18 +1,16 @@
-import { NotNullRuleConst } from 'types'
+import { NotEmptyRuleConst } from 'types'
 
 const code = 'revalid/rule/basic/not-empty'
 
-export const notEmpty: NotNullRuleConst = () => ({
-    name: 'not-empty',
+export const notEmpty: NotEmptyRuleConst = () => ({
     code,
-    test: (s?: string) => {
-        if (s && s.length > 0)
-            return {
-                passed: true
-            }
-        return {
-            passed: false
-        }
+    test: val => {
+        if (val == null) return null
+        if (val.length === undefined)
+            throw new Error('Object does not have length')
+        if (val.length > 0) return null
+
+        return 'is empty'
     }
 })
 

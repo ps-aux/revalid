@@ -6,16 +6,10 @@ const isTypeRule = (
 ): TypeRuleRuleConstructor => {
     const code = `revalid/rules/type/is-${typeName}`
     const cons = () => ({
-        name: `is-${typeName}`,
         code,
         test: (a?: any) => {
-            if (a == null)
-                return {
-                    passed: true
-                }
-            return {
-                passed: isType(a)
-            }
+            if (a == null) return null
+            return isType(a) ? null : 'is not of type ' + typeName
         }
     })
 
@@ -24,32 +18,17 @@ const isTypeRule = (
     return cons
 }
 
-export const number: TypeRuleRuleConstructor = isTypeRule(
-    'number',
-    x => typeof x === 'number'
-)
+export const number = isTypeRule('number', x => typeof x === 'number')
 
-export const integer: TypeRuleRuleConstructor = isTypeRule(
-    'integer',
-    x => typeof x === 'number'
-) // TODO
+export const integer = isTypeRule('integer', x => typeof x === 'number') // TODO
 
-export const decimal: TypeRuleRuleConstructor = isTypeRule(
-    'decimal',
-    x => typeof x === 'number'
-) // TODO
+export const decimal = isTypeRule('decimal', x => typeof x === 'number') // TODO
 
-export const string: TypeRuleRuleConstructor = isTypeRule(
-    'string',
-    x => typeof x === 'string'
-)
+export const string = isTypeRule('string', x => typeof x === 'string')
 
-export const boolean: TypeRuleRuleConstructor = isTypeRule(
-    'boolean',
-    x => typeof x === 'boolean'
-)
+export const boolean = isTypeRule('boolean', x => typeof x === 'boolean')
 
-export const isoDate: TypeRuleRuleConstructor = isTypeRule('valid-date', x => {
+export const isoDate = isTypeRule('valid-date', x => {
     const d = new Date(x)
     return !isNaN(d.getTime())
 })

@@ -3,19 +3,17 @@ import { RegexRuleConst } from 'types'
 const code = 'revalid/rule/basic/regex'
 
 export const regex: RegexRuleConst = regex => ({
-    name: 'matches-regex',
     code,
-    test: (val?: string) => {
-        if (val == null)
-            return {
-                passed: true
-            }
+    test: val => {
+        if (val == null) return null
         if (typeof val !== 'string')
             throw new Error(`${val} is not a string. Cannot test regex.`)
 
-        return {
-            passed: val.match(regex) != null
-        }
+        const matches = val.match(regex) != null
+
+        if (matches) return null
+
+        return `${val} does not match ${regex}`
     }
 })
 

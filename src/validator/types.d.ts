@@ -1,22 +1,18 @@
-import { RuleMap } from 'src'
+import { ValidationError, ValidationSchema } from 'src'
 
 export type ObjectData = { [key: string]: any }
 
-export type AttrValidationError = {
-    code: string
-    message: string
-    detail: any
-}
-
-export type ObjectValidationErrors = {
+export type ObjectValidationErrorResult = {
     [key: string]: {
         value: any
-        errors: AttrValidationError[]
+        errors: ValidationError[]
     }
 }
 
-export type ObjectValidator = (
-    data: ObjectData
-) => ObjectValidationErrors | null
+export type ObjectValidator = {
+    validate: (data: ObjectData) => ObjectValidationErrorResult | null
+}
 
-export type CreateObjectValidator = (schema: RuleMap) => ObjectValidator
+export type CreateObjectValidator = (
+    schema: ValidationSchema
+) => ObjectValidator

@@ -8,14 +8,14 @@ export type Spec<A> = {
 
 export const ruleTestCases = (specs: Spec<any>[]) => {
     specs.forEach(s => {
-        it(`${s.rule.name}: ${s.input} should be ${
+        it(`${s.rule.code}: ${s.input} should be ${
             s.passes ? '✓' : '✕'
         }`, () => {
-            const r = s.rule.test(s.input)
+            // @ts-ignore
+            const r = s.rule.test(s.input, null)
 
-            expect(r).toMatchObject({
-                passed: s.passes
-            })
+            if (s.passes) expect(r).toBeNull()
+            else expect(r).toBeDefined()
         })
     })
 }

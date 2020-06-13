@@ -1,18 +1,14 @@
-import { AnyErrDetail, ValidationError, ValidationRule } from '../../core/types'
+import { ValidationError, ValidationRule } from '../../core/types'
+import { RuleConstructor } from '../core/types'
 
-export type SchemaErrorDetail = {
+export type AttrError = {
     attr: string
     value: any
-    errors: ValidationError<AnyErrDetail>[]
-}[]
+    errors: ValidationError[]
+}
 
 export type Data = { [key: string]: any }
 
-export type RuleMap = { [key: string]: ValidationRule<any, AnyErrDetail>[] }
+export type ValidationSchema = { [key: string]: ValidationRule<any, any>[] }
 
-export type ObjRule = ValidationRule<Data, SchemaErrorDetail>
-
-export type ObjRuleConst = {
-    code: string
-    (schema: RuleMap): ObjRule
-}
+export type ObjRuleConst = RuleConstructor<Data, AttrError[], ValidationSchema>

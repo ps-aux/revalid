@@ -3,7 +3,9 @@ import { notNull } from 'src/rules/basic/notNull'
 import { notEmpty } from 'src/rules/basic/notEmpty'
 import { listOf } from 'src/rules/container/listOf'
 import { obj } from 'src/rules/object/obj'
+import { evalRule } from '../../core'
 
+// TODO fragile test
 describe('matchesSchema', () => {
     it('basic case', () => {
         const rule = obj({
@@ -24,47 +26,65 @@ describe('matchesSchema', () => {
             ]
         })
 
-        const r = rule.test({
-            foo: 'abc',
-            bar: 'not-string',
-            // baz missing
-            child: {},
-            items: [{}]
-        })
+        const r = rule.test(
+            {
+                foo: 'abc',
+                bar: 'not-number',
+                // baz missing
+                child: {},
+                items: [{}]
+            },
+            evalRule
+        )
 
-        // console.log(JSON.stringify(r, null, 4))
-        expect(r).toMatchObject({
-            passed: false,
-            error: {
-                message:
-                    'does not match schema Object with keys: foo,bar,baz,child,items',
-                detail: [
+        // TODO use partial matching
+        expect(r).toMatchObject([
+            {
+                attr: 'bar',
+                value: 'not-number',
+                errors: [
                     {
-                        attr: 'bar'
-                    },
+                        code: number.code,
+                        error: 'is not of type number'
+                    }
+                ]
+            },
+            {
+                attr: 'baz',
+                errors: [
                     {
-                        attr: 'baz'
-                    },
+                        code: notNull.code,
+                        error: 'cannot be null'
+                    }
+                ]
+            },
+            {
+                attr: 'items',
+                value: [{}],
+                errors: [
                     {
-                        attr: 'child',
-                        errors: [
-                            {
-                                code: obj.code
+                        code: listOf.code,
+                        error: {
+                            index: 0,
+                            item: {},
+                            error: {
+                                code: obj.code,
+                                error: [
+                                    {
+                                        attr: 'foo',
+                                        errors: [
+                                            {
+                                                code: notNull.code,
+                                                error: 'cannot be null'
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        ]
-                    },
-                    {
-                        attr: 'items',
-                        errors: [
-                            {
-                                code: listOf.code,
-                                message:
-                                    'Item at index 0 does not pass rule matches-schema'
-                            }
-                        ]
+                        }
                     }
                 ]
             }
-        })
+        ])
     })
 })

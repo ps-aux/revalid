@@ -1,21 +1,18 @@
-import { evalRule } from 'src/core/RuleEvaluator'
 import {
-    Data,
+    AttrError,
+    EvalRule,
     ObjRuleConst,
-    RuleEvaluator,
-    RuleMap,
-    SchemaErrorDetail,
     ValidationError,
     ValidationRule
 } from 'types'
 
 const testEntry = (
-    ruleEval: RuleEvaluator,
+    ruleEval: EvalRule,
     rules: ValidationRule<any, any>[],
     val: any
-): ValidationError<any>[] => {
+): ValidationError[] => {
     // TODO support for early exit
-    const errors: ValidationError<any>[] = []
+    const errors: ValidationError[] = []
 
     rules.forEach(r => {
         const err = ruleEval(r, val)
@@ -25,47 +22,23 @@ const testEntry = (
     return errors
 }
 
-const schemaToString = (s: RuleMap): string => {
-    // TODO implement
-    return `Object with keys: ${Object.keys(s).toString()}`
-}
-
 const code = 'revalid/rule/object/matches-schema'
 
 export const obj: ObjRuleConst = schema => {
-    const ruleEval = evalRule
-
     return {
-        name: 'matches-schema',
         code,
-        test: (data?: Data) => {
-            if (!data)
-                return {
-                    passed: true
-                }
+        test: (data, evalRule) => {
+            if (!data) return null
 
             if (Array.isArray(data)) {
-                return {
-                    passed: false,
-                    // TODO is it proper error ?
-                    error: {
-                        message: 'Input is an Array not an object',
-                        detail: [
-                            {
-                                attr: '.',
-                                value: data,
-                                errors: []
-                            }
-                        ]
-                    }
-                }
+                throw new Error('Input is an array not an object')
             }
 
-            const errors: SchemaErrorDetail = []
+            const errors: AttrError[] = []
 
             Object.entries(schema).forEach(([key, rules]) => {
                 const value = data[key]
-                const propErrors = testEntry(ruleEval, rules, value)
+                const propErrors = testEntry(evalRule, rules, value)
 
                 if (propErrors.length > 0) {
                     errors.push({
@@ -76,18 +49,9 @@ export const obj: ObjRuleConst = schema => {
                 }
             })
 
-            if (errors.length === 0)
-                return {
-                    passed: true
-                }
+            if (errors.length === 0) return null
 
-            return {
-                passed: false,
-                error: {
-                    message: 'does not match schema ' + schemaToString(schema),
-                    detail: errors
-                }
-            }
+            return errors
         }
     }
 }

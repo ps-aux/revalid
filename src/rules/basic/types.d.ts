@@ -1,18 +1,11 @@
-import { ConfRuleConstructor, RuleConstructor } from '../core/types'
-import { AnyErrDetail, NoErrDetail, WithCode } from '../../core/types'
+import { RuleConstructor, NoConfigRuleConstructor } from '../core/types'
 
-export type NotNullRuleConst = RuleConstructor<any, AnyErrDetail> & WithCode
+export type NotNullRuleConst = NoConfigRuleConstructor<any, string>
 
-export type NotEmptyRuleConst = RuleConstructor<string, AnyErrDetail> & WithCode
+export type NotEmptyRuleConst = NoConfigRuleConstructor<string | any[], string>
 
-export type RegexRuleConst = ConfRuleConstructor<string, NoErrDetail, RegExp> &
-    WithCode
+export type RegexRuleConst = RuleConstructor<string, string, RegExp>
 
-export type ConstantRuleType = ConfRuleConstructor<any, NoErrDetail, boolean> &
-    WithCode
+export type ConstantRuleType = RuleConstructor<any, string, boolean>
 
-export type EqRuleConst = ConfRuleConstructor<any, NoErrDetail, any> & WithCode
-
-// Types
-export type TypeRuleRuleConstructor = RuleConstructor<any, AnyErrDetail> &
-    WithCode
+export type EqRuleConst = RuleConstructor<any, string, any>

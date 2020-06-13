@@ -1,1 +1,1 @@
-export { compose as composeRules } from './compose'
+export { evalRule } from './EvalRule'

@@ -4,24 +4,19 @@ import { obj } from 'src/rules/object/obj'
 import { listOf } from 'src/rules/container/listOf'
 import { ValidationRule } from 'types'
 
+const myCode = 'must-be'
 const mustBe = (val: any): ValidationRule<any, any> => ({
-    name: `must-be-${val}`,
-    code: 'must-be',
+    code: myCode,
     test: x => {
         const passed = x === val
 
-        return {
-            passed,
-            error: passed
-                ? undefined
-                : {
-                      message: 'is not',
-                      detail: 'detail'
-                  }
-        }
+        if (passed) return null
+
+        return 'my-error'
     }
 })
 
+// TODO duplicated test with obj()
 describe('Validator', () => {
     it('basic test case', () => {
         const sut = objectValidator({
@@ -36,21 +31,17 @@ describe('Validator', () => {
             ]
         })
 
-        const res = sut({
+        const res = sut.validate({
             b: [456],
             e: {}
         })
-
-        // console.log('errors', JSON.stringify(res, null, 4))
 
         expect(res).toMatchObject({
             a: {
                 value: undefined,
                 errors: [
                     {
-                        code: 'must-be',
-                        message: 'is not',
-                        detail: 'detail'
+                        code: myCode
                     }
                 ]
             },
@@ -58,9 +49,7 @@ describe('Validator', () => {
                 value: [456],
                 errors: [
                     {
-                        code: listOf.code,
-                        message:
-                            'Item at index 0 does not pass rule must-be-abc'
+                        code: listOf.code
                     }
                 ]
             },
@@ -79,19 +68,10 @@ describe('Validator', () => {
                 ]
             },
             e: {
+                value: {},
                 errors: [
                     {
-                        code: obj.code,
-                        detail: [
-                            {
-                                attr: 'a',
-                                errors: [
-                                    {
-                                        code: notNull.code
-                                    }
-                                ]
-                            }
-                        ]
+                        code: obj.code
                     }
                 ]
             }

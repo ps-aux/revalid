@@ -3,17 +3,11 @@ import { NotNullRuleConst } from 'types'
 const code = 'revalid/rule/basic/not-null'
 
 export const notNull: NotNullRuleConst = () => ({
-    name: 'not-null',
     code,
-    test: (v?: any) => {
-        if (v === null || v === undefined)
-            return {
-                passed: false
-            }
+    test: v => {
+        if (v === null || v === undefined) return 'cannot be null'
 
-        return {
-            passed: true
-        }
+        return null
     }
 })
 

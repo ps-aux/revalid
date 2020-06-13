@@ -12,23 +12,16 @@ export const oneOf: OneOfRuleConst = vals => {
     })
 
     return {
-        name: `one-of-${str}`,
         code,
-        test: (val?: any) => {
-            if (val == null)
-                return {
-                    passed: true
-                }
+        test: val => {
+            if (val == null) return null
             const passed = vals.includes(val)
 
+            if (passed) return null
+
             return {
-                passed,
-                error: passed
-                    ? undefined
-                    : {
-                          message: `${val} is not one of ${str}`,
-                          detail: vals
-                      }
+                message: `${val} is not one of ${str}`,
+                values: vals
             }
         }
     }

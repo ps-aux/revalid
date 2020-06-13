@@ -19,16 +19,6 @@ describe('oneOf rule cases', () => {
             rule: strRule,
             input: 'd',
             passes: false
-        },
-        {
-            rule: strRule,
-            input: null,
-            passes: true
-        },
-        {
-            rule: strRule,
-            input: undefined,
-            passes: true
         }
     ])
 

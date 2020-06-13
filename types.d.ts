@@ -1,4 +1,3 @@
-import { ComposeRulesFun } from 'src/core/types'
 import {
     ConstantRuleType,
     EqRuleConst,
@@ -15,10 +14,6 @@ import { CreateObjectValidator } from './src/validator/types'
 export * from 'src/core/types'
 export * from './src/rules/types'
 export * from './src/validator/types'
-
-// Object validator
-
-export declare const objectValidator: CreateObjectValidator
 
 // Basic
 
@@ -56,6 +51,6 @@ export declare const listOf: ListOfRuleConst
 
 export declare const obj: ObjRuleConst
 
-// Compose
+// Object validator
 
-export declare const composeRules: ComposeRulesFun
+export declare const objectValidator: CreateObjectValidator

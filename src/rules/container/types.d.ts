@@ -1,9 +1,14 @@
-import { AnyErrDetail, ValidationRule } from '../../core/types'
+import { ValidationRule } from '../../core/types'
+import { RuleConstructor } from '../core/types'
 
-export type OneOfRuleConst = {
-    code: string
-    (vals: (string | number)[]): ValidationRule<string | number, AnyErrDetail>
-}
+export type OneOfRuleConst = RuleConstructor<
+    string | number,
+    {
+        message: string
+        values: (string | number)[]
+    },
+    (string | number)[]
+>
 
 export type ListOfRuleErrorDetail = {
     index: number
@@ -13,7 +18,20 @@ export type ListOfRuleErrorDetail = {
 
 export type ListOfRule = ValidationRule<any[], ListOfRuleErrorDetail>
 
-export type ListOfRuleConst = {
+export type ListOfRuleConst_ = {
     code: string
     (rule: ValidationRule<any, any>): ListOfRule
 }
+
+export type ListOfRuleConst = RuleConstructor<
+    any[],
+    {
+        index: number
+        item: any
+        error: {
+            code: string
+            error: any
+        }
+    },
+    ValidationRule<any, any>
+>
