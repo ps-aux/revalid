@@ -32,3 +32,8 @@ export type ValidationRule<A, ErrDetail> = {
 export type AnyErrDetail = any
 
 export type NoErrDetail = void
+
+export type ComposeRulesFun = (
+    rules: ValidationRule<any, AnyErrDetail>[],
+    name?: string
+) => ValidationRule<any, AnyErrDetail>

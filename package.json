@@ -1,6 +1,6 @@
 {
   "name": "@ps-aux/revalid",
-  "version": "0.10.0-new-typings",
+  "version": "0.10.2-new-typings",
   "description": "",
   "module": "lib/index.js",
   "main": "lib/index.js",

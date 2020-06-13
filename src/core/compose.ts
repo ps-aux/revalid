@@ -1,6 +1,6 @@
-import { composeRulesFun } from 'src'
+import { ComposeRulesFun } from 'src'
 
-export const compose: composeRulesFun = (rules, name) => {
+export const compose: ComposeRulesFun = (rules, name) => {
     if (!name) {
         name = rules.map(r => r.name).join(' & ')
     }

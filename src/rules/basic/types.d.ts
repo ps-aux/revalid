@@ -1,5 +1,5 @@
-import { ConfRuleConstructor, RuleConstructor } from '../types'
-import { AnyErrDetail, NoErrDetail, WithCode } from '../../core-types'
+import { ConfRuleConstructor, RuleConstructor } from '../core/types'
+import { AnyErrDetail, NoErrDetail, WithCode } from '../../core/types'
 
 export type NotNullRuleConst = RuleConstructor<any, AnyErrDetail> & WithCode
 

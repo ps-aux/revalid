@@ -1,5 +1,5 @@
-import { ruleTestCases } from 'src/test/ruleTestCases'
-import { notNull } from 'src/rules/basic-rules/notNull'
+import { ruleTestCases } from 'src/_test/ruleTestCases'
+import { notNull } from 'src/rules/basic/notNull'
 
 describe('notNull rule cases', () => {
     const rule = notNull()

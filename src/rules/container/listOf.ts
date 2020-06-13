@@ -1,8 +1,8 @@
-import { listOfRuleConst } from 'src'
+import { ListOfRuleConst } from 'src'
 
 const code = 'revalid/rule/container/list-of'
 
-export const listOf: listOfRuleConst = rule => {
+export const listOf: ListOfRuleConst = rule => {
     return {
         name: `list-of-${rule.name}`,
         code,

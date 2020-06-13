@@ -1,8 +1,8 @@
-import { ruleTestCases } from 'src/test/ruleTestCases'
-import { regex } from 'src/rules/basic-rules/regex'
+import { ruleTestCases } from 'src/_test/ruleTestCases'
+import { notEmpty } from 'src/rules/basic/notEmpty'
 
-describe('regex rule cases', () => {
-    const rule = regex(/a/)
+describe('notEmpty rule cases', () => {
+    const rule = notEmpty()
 
     ruleTestCases([
         {
@@ -12,22 +12,17 @@ describe('regex rule cases', () => {
         },
         {
             rule,
-            input: 'b',
+            input: '',
             passes: false
         },
         {
             rule,
             input: null,
-            passes: true
+            passes: false
         },
         {
             rule,
             input: undefined,
-            passes: true
-        },
-        {
-            rule,
-            input: '',
             passes: false
         }
     ])

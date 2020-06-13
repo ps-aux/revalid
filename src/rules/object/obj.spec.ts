@@ -1,7 +1,7 @@
-import { number, string } from 'src/rules/type-rules/simpleTypeRules'
-import { notNull } from 'src/rules/basic-rules/notNull'
-import { notEmpty } from 'src/rules/basic-rules/notEmpty'
-import { listOf } from 'src/rules/container-rules/listOf'
+import { number, string } from 'src/rules/type/simpleTypeRules'
+import { notNull } from 'src/rules/basic/notNull'
+import { notEmpty } from 'src/rules/basic/notEmpty'
+import { listOf } from 'src/rules/container/listOf'
 import { obj } from 'src/rules/object/obj'
 
 describe('matchesSchema', () => {

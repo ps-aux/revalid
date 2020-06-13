@@ -7,21 +7,45 @@ import {
     TypeRuleRuleConstructor,
     AnyErrDetail,
     ValidationError,
-    ValidationRule
+    ValidationRule,
+    ListOfRuleConst,
+    OneOfRuleConst,
+    ObjectData,
+    AttrValidationError,
+    ObjectValidationErrors,
+    ObjectValidator,
+    CreateObjectValidator,
+    ComposeRulesFun
 } from 'src'
 
 type Test = {
-    rules: {
-        c: ConstantRuleType
-        e: EqRuleConst
-        ne: NotEmptyRuleConst
-        nn: NotNullRuleConst
-        trrc: TypeRuleRuleConstructor
-        rg: RegexRuleConst
-    }
     core: {
         an: AnyErrDetail
         ve: ValidationError<any>
         vr: ValidationRule<any, any>
+        compose: ComposeRulesFun
+    }
+    rules: {
+        basic: {
+            eq: EqRuleConst
+            notNull: NotNullRuleConst
+            notEmpty: NotEmptyRuleConst
+            regex: RegexRuleConst
+            constant: ConstantRuleType
+        }
+        type: {
+            trrc: TypeRuleRuleConstructor
+        }
+        container: {
+            list: ListOfRuleConst
+            oneOf: OneOfRuleConst
+        }
+        object: {
+            data: ObjectData
+            attrValError: AttrValidationError
+            objValErrors: ObjectValidationErrors
+            validator: ObjectValidator
+            create: CreateObjectValidator
+        }
     }
 }

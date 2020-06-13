@@ -1,25 +1,29 @@
-import { ruleTestCases } from 'src/test/ruleTestCases'
-import { eq } from 'src/rules/basic-rules/eq'
+import { ruleTestCases } from 'src/_test/ruleTestCases'
+import { constant } from 'src/rules/basic/constant'
 
-describe('eq rule cases', () => {
+describe('constant rule cases', () => {
+    const always = constant(true)
+
+    const never = constant(false)
+
     ruleTestCases([
         {
-            rule: eq('a'),
+            rule: always,
             input: 'a',
             passes: true
         },
         {
-            rule: eq('aaa'),
+            rule: always,
             input: null,
             passes: true
         },
         {
-            rule: eq(111),
+            rule: always,
             input: undefined,
             passes: true
         },
         {
-            rule: eq(12),
+            rule: never,
             input: 'wowow',
             passes: false
         }

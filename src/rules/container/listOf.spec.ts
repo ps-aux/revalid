@@ -1,6 +1,6 @@
-import { ruleTestCases } from 'src/test/ruleTestCases'
-import { listOf } from 'src/rules/container-rules/listOf'
-import { eq } from 'src/rules/basic-rules/eq'
+import { ruleTestCases } from 'src/_test/ruleTestCases'
+import { listOf } from 'src/rules/container/listOf'
+import { eq } from 'src/rules/basic/eq'
 
 describe('listOf rule cases', () => {
     ruleTestCases([

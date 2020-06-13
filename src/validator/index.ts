@@ -1,0 +1,1 @@
+export { objectValidator } from './ObjectValidator'

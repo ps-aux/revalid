@@ -1,8 +1,8 @@
-import { oneOfRuleConst } from 'types'
+import { OneOfRuleConst } from 'types'
 
 const code = 'revalid/rule/container/one-of'
 
-export const oneOf: oneOfRuleConst = vals => {
+export const oneOf: OneOfRuleConst = vals => {
     const str = `[${vals.join(',')}]`
 
     vals.forEach(v => {
