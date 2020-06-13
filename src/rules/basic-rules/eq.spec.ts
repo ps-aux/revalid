@@ -1,5 +1,5 @@
 import { ruleTestCases } from 'src/test/ruleTestCases'
-import { eq } from 'src/rule-impl/basic-rules/eq'
+import { eq } from 'src/rules/basic-rules/eq'
 
 describe('eq rule cases', () => {
     ruleTestCases([

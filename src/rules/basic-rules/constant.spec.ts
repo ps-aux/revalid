@@ -1,5 +1,5 @@
 import { ruleTestCases } from 'src/test/ruleTestCases'
-import { constant } from 'src/rule-impl/basic-rules/constant'
+import { constant } from 'src/rules/basic-rules/constant'
 
 describe('constant rule cases', () => {
     const always = constant(true)

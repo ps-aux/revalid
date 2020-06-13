@@ -1,8 +1,8 @@
-import { number, string } from 'src/rule-impl/type-rules/simpleTypeRules'
-import { notNull } from 'src/rule-impl/basic-rules/notNull'
-import { notEmpty } from 'src/rule-impl/basic-rules/notEmpty'
-import { listOf } from 'src/rule-impl/container-rules/listOf'
-import { obj } from 'src/rule-impl/object/obj'
+import { number, string } from 'src/rules/type-rules/simpleTypeRules'
+import { notNull } from 'src/rules/basic-rules/notNull'
+import { notEmpty } from 'src/rules/basic-rules/notEmpty'
+import { listOf } from 'src/rules/container-rules/listOf'
+import { obj } from 'src/rules/object/obj'
 
 describe('matchesSchema', () => {
     it('basic case', () => {

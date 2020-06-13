@@ -1,8 +1,8 @@
 import { ruleTestCases } from 'src/test/ruleTestCases'
-import { notNull } from 'src/rule-impl/basic-rules/notNull'
+import { regex } from 'src/rules/basic-rules/regex'
 
-describe('notNull rule cases', () => {
-    const rule = notNull()
+describe('regex rule cases', () => {
+    const rule = regex(/a/)
 
     ruleTestCases([
         {
@@ -12,23 +12,23 @@ describe('notNull rule cases', () => {
         },
         {
             rule,
-            input: {},
-            passes: true
+            input: 'b',
+            passes: false
         },
         {
             rule,
             input: null,
-            passes: false
+            passes: true
         },
         {
             rule,
             input: undefined,
-            passes: false
+            passes: true
         },
         {
             rule,
             input: '',
-            passes: true
+            passes: false
         }
     ])
 })

@@ -1,8 +1,8 @@
-import { notNull } from 'src/rule-impl/basic-rules/notNull'
-import { ValidationRule } from 'src'
+import { notNull } from 'src/rules/basic-rules/notNull'
 import { objectValidator } from './ObjectValidator'
-import { obj } from 'src/rule-impl/object/obj'
-import { listOf } from 'src/rule-impl/container-rules/listOf'
+import { obj } from 'src/rules/object/obj'
+import { listOf } from 'src/rules/container-rules/listOf'
+import { ValidationRule } from 'types'
 
 const mustBe = (val: any): ValidationRule<any, any> => ({
     name: `must-be-${val}`,

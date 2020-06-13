@@ -1,49 +1,27 @@
-// Core
+import { AnyErrDetail, ValidationError, ValidationRule } from './src/core-types'
+import {
+    ConstantRuleType,
+    EqRuleConst,
+    NotEmptyRuleConst,
+    NotNullRuleConst,
+    RegexRuleConst,
+    TypeRuleRuleConstructor
+} from './src/rules/basic-rules/types'
 
-export type ValidationTestResult<ErrDetail> = {
-    passed: boolean
-    error?: {
-        message: string
-        detail: ErrDetail
-    }
-}
-
-export type ValidationError<ErrDetail> = {
-    code: string
-    message: string
-    detail: ErrDetail
-}
-
-export type RuleEvaluator = {
-    <A, ErrDetail>(
-        rule: ValidationRule<A, ErrDetail>,
-        data: A
-    ): ValidationError<ErrDetail> | null
-}
-
-export type WithCode = {
-    code: string
-}
-
-export type ValidationRule<A, ErrDetail> = {
-    name: string
-    code: string
-    test: (val?: A) => ValidationTestResult<ErrDetail>
-}
-
-export type AnyErrDetail = any
-
-export type NoErrDetail = void
-
-// Rule construction
-
-export type RuleConstructor<A, ErrDetail> = {
-    (): ValidationRule<A, ErrDetail>
-}
-
-export type ConfRuleConstructor<A, ErrDetail, Config> = {
-    (conf: Config): ValidationRule<A, ErrDetail>
-}
+export {
+    AnyErrDetail,
+    ValidationError,
+    ValidationRule,
+    RuleEvaluator
+} from './src/core-types'
+export {
+    ConstantRuleType,
+    EqRuleConst,
+    NotEmptyRuleConst,
+    NotNullRuleConst,
+    RegexRuleConst,
+    TypeRuleRuleConstructor
+} from './src/rules/basic-rules/types'
 
 // Object validation rule
 
@@ -85,31 +63,16 @@ export declare const objectValidator: CreateObjectValidator
 // Rules impl
 
 // Basic
-export type NotNullRuleConst = RuleConstructor<any, AnyErrDetail> & WithCode
 
 export declare const notNull: NotNullRuleConst
 
-export type NotEmptyRuleConst = RuleConstructor<string, AnyErrDetail> & WithCode
-
 export declare const notEmpty: NotEmptyRuleConst
-
-export type RegexRuleConst = ConfRuleConstructor<string, NoErrDetail, RegExp> &
-    WithCode
 
 export declare const regex: RegexRuleConst
 
-export type ConstantRuleType = ConfRuleConstructor<any, NoErrDetail, boolean> &
-    WithCode
-
 export declare const constant: ConstantRuleType
 
-export type EqRuleConst = ConfRuleConstructor<any, NoErrDetail, any> & WithCode
-
 export declare const eq: EqRuleConst
-
-// Types
-export type TypeRuleRuleConstructor = RuleConstructor<any, AnyErrDetail> &
-    WithCode
 
 export declare const string: TypeRuleRuleConstructor
 

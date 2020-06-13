@@ -1,5 +1,5 @@
 import { ruleTestCases } from 'src/test/ruleTestCases'
-import { oneOf } from 'src/rule-impl/container-rules/oneOf'
+import { oneOf } from 'src/rules/container-rules/oneOf'
 
 describe('oneOf rule cases', () => {
     const strRule = oneOf(['a', 'b', 'c'])

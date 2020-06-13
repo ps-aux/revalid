@@ -1,5 +1,5 @@
 import { ObjectValidationErrors, ObjectValidator, RuleMap } from 'types'
-import { obj } from 'src/rule-impl/object/obj'
+import { obj } from 'src/rules/object/obj'
 
 export const objectValidator = (def: RuleMap): ObjectValidator => {
     return d => {
