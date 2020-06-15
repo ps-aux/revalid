@@ -12,7 +12,8 @@ import {
     ObjectData,
     ObjectValidationErrorResult,
     ObjectValidator,
-    CreateObjectValidator
+    CreateObjectValidator,
+    AttrError
 } from 'src'
 
 type Test = {
@@ -40,6 +41,7 @@ type Test = {
             objValErrors: ObjectValidationErrorResult
             validator: ObjectValidator
             create: CreateObjectValidator
+            attrError: AttrError
         }
     }
 }

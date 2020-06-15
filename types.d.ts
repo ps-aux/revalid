@@ -11,7 +11,7 @@ import {
 } from './src/rules/types'
 import { CreateObjectValidator } from './src/validator/types'
 
-export * from 'src/core/types'
+export * from './src/core/types'
 export * from './src/rules/types'
 export * from './src/validator/types'
 

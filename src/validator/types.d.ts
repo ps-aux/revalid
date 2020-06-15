@@ -1,4 +1,4 @@
-import { ValidationError, ValidationSchema } from 'src'
+import { ValidationError, ValidationSchema } from '../../types'
 
 export type ObjectData = { [key: string]: any }
 
