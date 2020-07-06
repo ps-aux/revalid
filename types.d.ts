@@ -10,10 +10,15 @@ import {
     TypeRuleRuleConstructor
 } from './src/rules/types'
 import { CreateObjectValidator } from './src/validator/types'
+import { EvalRule } from './src/core/types'
 
 export * from './src/core/types'
 export * from './src/rules/types'
 export * from './src/validator/types'
+
+// Core
+
+export declare const evalRule: EvalRule
 
 // Basic
 

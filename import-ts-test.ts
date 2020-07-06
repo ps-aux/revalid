@@ -13,13 +13,15 @@ import {
     ObjectValidationErrorResult,
     ObjectValidator,
     CreateObjectValidator,
-    AttrError
+    AttrError,
+    EvalRule
 } from 'src'
 
 type Test = {
     core: {
         ve: ValidationError<any>
         vr: ValidationRule<any, any>
+        evalRule: EvalRule
     }
     rules: {
         basic: {
