@@ -1,4 +1,4 @@
-import { RegexRuleConst } from 'types'
+import { RegexRuleConst } from './types'
 
 const code = 'revalid/rule/basic/regex'
 

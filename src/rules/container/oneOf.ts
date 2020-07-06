@@ -1,4 +1,4 @@
-import { OneOfRuleConst } from 'types'
+import { OneOfRuleConst } from './types'
 
 const code = 'revalid/rule/container/one-of'
 

@@ -1,4 +1,4 @@
-import { NotNullRuleConst } from 'types'
+import { NotNullRuleConst } from './types'
 
 const code = 'revalid/rule/basic/not-null'
 

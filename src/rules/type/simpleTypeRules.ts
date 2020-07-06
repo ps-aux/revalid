@@ -1,4 +1,4 @@
-import { TypeRuleRuleConstructor } from 'types'
+import { TypeRuleRuleConstructor } from './types'
 
 const isTypeRule = (
     typeName: string,

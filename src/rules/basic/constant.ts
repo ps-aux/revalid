@@ -1,4 +1,4 @@
-import { ConstantRuleType } from 'types'
+import { ConstantRuleType } from './types'
 
 const code = 'revalid/rule/basic/constant'
 

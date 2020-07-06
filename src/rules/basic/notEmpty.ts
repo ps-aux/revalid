@@ -1,4 +1,4 @@
-import { NotEmptyRuleConst } from 'types'
+import { NotEmptyRuleConst } from './types'
 
 const code = 'revalid/rule/basic/not-empty'
 

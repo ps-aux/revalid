@@ -1,4 +1,4 @@
-import { EqRuleConst } from 'types'
+import { EqRuleConst } from './types'
 
 const code = 'revalid/rule/basic/eq'
 

@@ -4,7 +4,7 @@ import {
     ObjRuleConst,
     ValidationError,
     ValidationRule
-} from 'types'
+} from '../../../types'
 
 const testEntry = (
     ruleEval: EvalRule,
