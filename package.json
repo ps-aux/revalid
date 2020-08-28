@@ -71,5 +71,9 @@
       "eslint --fix",
       "git add"
     ]
+  },
+  "dependencies": {
+    "flat": "^5.0.2",
+    "lodash": "^4.17.20"
   }
 }

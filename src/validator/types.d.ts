@@ -1,6 +1,7 @@
 import { ValidationError, ValidationSchema } from '../../types'
 
 export type ObjectData = { [key: string]: any }
+export * from './tree/types'
 
 export type ObjectValidationErrorResult = {
     [key: string]: {
