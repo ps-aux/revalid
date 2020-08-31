@@ -10,6 +10,7 @@ import {
     TypeRuleRuleConstructor
 } from './src/rules/types'
 import { EvalRule } from './src/core/types'
+import { CreateObjectValidator, CreateTreeValidator } from 'src/validator/types'
 
 export * from './src/core/types'
 export * from './src/rules/types'
@@ -55,4 +56,8 @@ export declare const listOf: ListOfRuleConst
 
 export declare const obj: ObjRuleConst
 
-export * from './src/validator/index'
+// Object validator
+
+export declare const objectValidator: CreateObjectValidator
+
+export declare const treeValidator: CreateTreeValidator

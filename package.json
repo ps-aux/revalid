@@ -1,6 +1,6 @@
 {
     "name": "@ps-aux/revalid",
-    "version": "0.12.0-rc2",
+    "version": "0.12.0-rc3",
     "description": "",
     "module": "lib/index.js",
     "main": "lib/index.js",
