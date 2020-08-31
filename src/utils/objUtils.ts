@@ -1,12 +1,12 @@
 import _flatten from 'flat'
-import { pick } from 'ramda'
+import { path as getByPath } from 'ramda'
 
 const unflatten = _flatten.unflatten
 
 export type Obj = Record<string, unknown>
 
 export const get = (path: string[], obj: Obj | null | undefined) =>
-    pick(path, obj)
+    getByPath(path, obj)
 
 const isObj = (obj: any): obj is Obj => {
     return typeof obj === 'object' && !Array.isArray(obj)
