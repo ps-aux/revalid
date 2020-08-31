@@ -14,5 +14,3 @@ it('flattenObj', () => {
 
     console.log('r', r)
 })
-
-it('get', () => {})
