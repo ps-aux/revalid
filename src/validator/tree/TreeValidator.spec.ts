@@ -1,4 +1,3 @@
-import { notNull } from 'src/rules/basic/notNull'
 import { treeValidator } from 'src/validator/tree/TreeValidator'
 import { ValidationError, ValidationRule } from '../../core/types'
 
@@ -14,6 +13,13 @@ const myRule: ValidationRule<any, any> = {
     }
 }
 
+const alwaysTrue: ValidationRule<any, any> = {
+    code: 'any',
+    test: () => {
+        return null
+    }
+}
+
 // TODO duplicated test with obj()
 describe('Validator', () => {
     it('basic test case', () => {
@@ -21,7 +27,8 @@ describe('Validator', () => {
             a: {
                 a1: [myRule, myRule],
                 a2: {
-                    a21: [myRule, myRule]
+                    a21: [myRule, myRule],
+                    a22: [alwaysTrue]
                 }
             },
             b: [myRule]
@@ -38,5 +45,8 @@ describe('Validator', () => {
             },
             b: [myRuleError]
         })
+
+        // @ts-ignore
+        expect(res.a.a2.a22).toBeUndefined()
     })
 })

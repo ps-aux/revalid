@@ -3,7 +3,7 @@ import {
     TreeValidationErrorResult,
     ValidationError,
     ValidationRule
-} from 'types'
+} from '../../../types'
 import { evalRule } from '../../core'
 import { collectAttrPaths, get, Obj, toObj } from '../../utils/objUtils'
 
@@ -11,8 +11,7 @@ const propRule = (
     path: string[],
     rule: ValidationRule<any, any>
 ): ValidationRule<Obj, any> => {
-    const strPath = path.join('.')
-    const getVal = (obj: Obj | null | undefined) => get(strPath, obj)
+    const getVal = (obj: Obj | null | undefined) => get(path, obj)
 
     return {
         code: rule.code,
@@ -49,7 +48,7 @@ export const treeValidator: CreateTreeValidator = schema => {
                 const errs = pr.rules
                     .map(r => evalRule(r, obj))
                     .filter(err => !!err) as ValidationError[]
-                if (errs) attrErrors.push([path, errs])
+                if (errs.length > 0) attrErrors.push([path, errs])
             })
 
             if (attrErrors.length === 0) return null

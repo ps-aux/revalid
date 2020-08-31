@@ -1,12 +1,12 @@
-import _get from 'lodash/get'
 import _flatten from 'flat'
+import { pick } from 'ramda'
 
 const unflatten = _flatten.unflatten
 
 export type Obj = Record<string, unknown>
 
-export const get = (path: string, obj: Obj | null | undefined) =>
-    _get(obj, path)
+export const get = (path: string[], obj: Obj | null | undefined) =>
+    pick(path, obj)
 
 const isObj = (obj: any): obj is Obj => {
     return typeof obj === 'object' && !Array.isArray(obj)

@@ -1,6 +1,6 @@
 import { flattenObj } from 'src/utils/objUtils'
 
-it('flattenUntil', () => {
+it('flattenObj', () => {
     const obj = {
         a: {
             b: 123,
@@ -14,3 +14,5 @@ it('flattenUntil', () => {
 
     console.log('r', r)
 })
+
+it('get', () => {})

@@ -9,7 +9,6 @@ import {
     RegexRuleConst,
     TypeRuleRuleConstructor
 } from './src/rules/types'
-import { CreateObjectValidator } from './src/validator/types'
 import { EvalRule } from './src/core/types'
 
 export * from './src/core/types'
@@ -56,6 +55,4 @@ export declare const listOf: ListOfRuleConst
 
 export declare const obj: ObjRuleConst
 
-// Object validator
-
-export declare const objectValidator: CreateObjectValidator
+export * from './src/validator/index'
